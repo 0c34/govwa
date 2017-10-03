@@ -1,36 +1,36 @@
 package main
 
-import(
-	"net/http"
+import (
 	"fmt"
+	"net/http"
 )
-import "sec/util"
-import "sec/vulnerability/inputvalidation"
-import sqli "sec/vulnerability/sqli"
+import "secureCodingLab/util"
+import validation "secureCodingLab/vulnerability/inputvalidation"
+import sqli "secureCodingLab/vulnerability/sqli"
 
-func indexHandler(w http.ResponseWriter, r *http.Request){
+func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
 //input validation
-func validateHandler(w http.ResponseWriter, r *http.Request){
-	data := inputvalidation.WithValidation(r)
-	datares := struct{
+func validateHandler(w http.ResponseWriter, r *http.Request) {
+	data := validation.WithValidation(r)
+	datares := struct {
 		Res string
 	}{
-		Res : data,
+		Res: data,
 	}
 	fmt.Println(datares.Res)
-	util.SafeRender(w,"validation",datares)
+	util.SafeRender(w, "validation", datares)
 }
 
 //sql injection and escaping
-func getUserHandler(w http.ResponseWriter, r *http.Request){
+func getUserHandler(w http.ResponseWriter, r *http.Request) {
 	data, err := sqli.UnsafeGetData(r)
-	if err != nil{
+	if err != nil {
 		fmt.Println(err.Error())
 	}
-	fmt.Println(data)
+	util.RenderAsJson(w, data)
 }
 func main() {
 	http.HandleFunc("/", indexHandler)
