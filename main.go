@@ -26,7 +26,7 @@ func validateHandler(w http.ResponseWriter, r *http.Request) {
 
 //sql injection and escaping
 func getUserHandler(w http.ResponseWriter, r *http.Request) {
-	data, err := sqli.UnsafeGetData(r)
+	data, err := sqli.SafeGetData(r)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
