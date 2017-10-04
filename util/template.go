@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os"
 )
 
 func SafeRender(w http.ResponseWriter, tmpl string, p interface{}) {
@@ -14,13 +13,6 @@ func SafeRender(w http.ResponseWriter, tmpl string, p interface{}) {
 		fmt.Printf(err.Error())
 	}
 	t.Execute(w, p)
-}
-func RenderAsJs(w http.ResponseWriter, tmpl string, jsscript string) {
-	t, err := template.ParseFiles("templates/" + tmpl + ".html")
-	if err != nil {
-		fmt.Printf(err.Error())
-	}
-	t.ExecuteTemplate(os.Stdout, "T", jsscript)
 }
 
 func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
