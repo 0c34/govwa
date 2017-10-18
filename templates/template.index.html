@@ -2,8 +2,8 @@
 <html>
     {{template "template.header" .}}
     {{template "template.sidebar" .}}
-    <div class="col-md-6">
-    <div class="panel panel-success">
+    <div class="col-md-9">
+    <div class="panel panel-primary">
         <div class="panel-heading">Set Level</div>
         <div class="panel-body">
             <form action="http://localhost:8082/index" method="POST">
@@ -18,7 +18,7 @@
                     <input class="btn btn-default" type="submit" value="Send">
                     </div>
             </form>
-            <div class="level">Level : <b>{{.Level}}</b></div>
+            <div class="level">Level : <b>{{.level}}</b></div>
             <a class="btn btn-small btn-default" href="http://localhost:8082/validate">Input Validation</a>
             <a class="btn btn-small btn-default" href="http://localhost:8082/getinfo?name=tes">XSS</a>
             <a class="btn btn-small btn-default" href="http://localhost:8082/getuser?uid=1">SQL Injection</a>

@@ -6,26 +6,9 @@ import (
 	"net/http"
 )
 import "github.com/gorilla/mux"
-import "secureCodingLab/util"
-//import validation "secureCodingLab/vulnerability/inputvalidation"
-import sqli "secureCodingLab/vulnerability/sqli"
-import xss "secureCodingLab/vulnerability/xss"
-
-//input validation
-/* func validateHandler(w http.ResponseWriter, r *http.Request) {
-
-	var data = validation.WithNoValidation(r) //default
-	if util.CheckLevel(r) {                   //if level == high
-		data = validation.WithValidation(r)
-	}
-	datares := struct {
-		Res string
-	}{
-		Res: data,
-	}
-	//fmt.Println(checkLevel(r))
-	util.SafeRender(w, "validation", datares)
-} */
+import "govwa/util"
+import sqli "govwa/vulnerability/sqli"
+import xss "govwa/vulnerability/xss"
 
 //sql injection and escaping
 func getUserHandler(w http.ResponseWriter, r *http.Request) {
@@ -61,7 +44,8 @@ func getName(w http.ResponseWriter, r *http.Request) {
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	cookie := util.SetCookieLevel(w, r)
 	data := make(map[string]interface{})
-	data["cookie"] = cookie
+	data["level"] = cookie
+	data["title"] = "Index"
 	util.SafeRender(w,"template.index", data)
 }
 
@@ -69,7 +53,7 @@ func main() {
 	s := http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))) //public directory
 	r := mux.NewRouter()
 	r.HandleFunc("/", indexHandler)
-	//r.HandleFunc("/validate", validateHandler)
+	r.HandleFunc("/index", indexHandler)
 	r.HandleFunc("/getuser", getUserHandler)
 	r.HandleFunc("/getinfo", getName)
 	r.PathPrefix("/public/").Handler(s)
