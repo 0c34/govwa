@@ -2,17 +2,14 @@ package util
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"net/http"
 )
 
-func SafeRender(w http.ResponseWriter, tmpl string, p interface{}) {
-	t, err := template.ParseFiles("templates/" + tmpl + ".html")
-	if err != nil {
-		fmt.Printf(err.Error())
-	}
-	t.Execute(w, p)
+func SafeRender(w http.ResponseWriter, name string, data map[string]interface{}) {
+
+	template := template.Must(template.ParseGlob("templates/*"))
+	template.ExecuteTemplate(w, name, data)
 }
 
 func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
@@ -24,4 +21,16 @@ func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
 	}
 	w.Write(b)
 	return
+}
+
+func UnSafeRender(w http.ResponseWriter, name string, data ...interface{}) {
+
+	template := template.Must(template.ParseGlob("templates/*"))
+	template.ExecuteTemplate(w, name, data)
+}
+func TempRender(w http.ResponseWriter) {
+	data := make(map[string]interface{})
+	data["coba"] = "coba"
+	template := template.Must(template.ParseGlob("templates/*"))
+	template.ExecuteTemplate(w, "template.index", data)
 }

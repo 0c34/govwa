@@ -2,16 +2,17 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
-
+import "github.com/gorilla/mux"
 import "secureCodingLab/util"
-import validation "secureCodingLab/vulnerability/inputvalidation"
+//import validation "secureCodingLab/vulnerability/inputvalidation"
 import sqli "secureCodingLab/vulnerability/sqli"
 import xss "secureCodingLab/vulnerability/xss"
 
 //input validation
-func validateHandler(w http.ResponseWriter, r *http.Request) {
+/* func validateHandler(w http.ResponseWriter, r *http.Request) {
 
 	var data = validation.WithNoValidation(r) //default
 	if util.CheckLevel(r) {                   //if level == high
@@ -24,12 +25,12 @@ func validateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	//fmt.Println(checkLevel(r))
 	util.SafeRender(w, "validation", datares)
-}
+} */
 
 //sql injection and escaping
 func getUserHandler(w http.ResponseWriter, r *http.Request) {
 	data, err := sqli.UnsafeGetData(r) //default function set to unsafe
-	if util.CheckLevel(r) { //if level == high
+	if util.CheckLevel(r) {            //if level == high
 		data, err = sqli.SafeGetData(r)
 	}
 	if err != nil {
@@ -40,34 +41,40 @@ func getUserHandler(w http.ResponseWriter, r *http.Request) {
 
 //cros site scripting
 func getName(w http.ResponseWriter, r *http.Request) {
-	name := r.URL.Query().Get("name")
+	//name := r.URL.Query().Get("name")
+	name := r.FormValue("name")
 	data := xss.New()
 	if !util.CheckLevel(r) { //if level == low
 		data.UnEscapeString(name)
-	}else{
+	} else {
 		data.EscapeString(name)
 	}
 	fmt.Println(data.Name)
-	fmt.Fprintf(w, data.Name) //usafe response
+
+	param := make(map[string]interface{})
+	param["name"] = template.HTML(name)
+
+	util.UnSafeRender(w, "template.xss", param)
 }
 
 //index and set cookie
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	cookie := util.SetCookieLevel(w, r)
-	data := struct {
-		Title string
-		Level string
-	}{
-		Title: "Index",
-		Level: cookie,
-	}
-	util.SafeRender(w, "index", data)
+	data := make(map[string]interface{})
+	data["cookie"] = cookie
+	util.SafeRender(w,"template.index", data)
 }
-func main() {
-	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/validate", validateHandler) //input validation
-	http.HandleFunc("/getuser", getUserHandler)   //sql injection
-	http.HandleFunc("/getinfo", getName)          //cross site scripting
 
-	http.ListenAndServe(":8082", nil)
+func main() {
+	s := http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))) //public directory
+	r := mux.NewRouter()
+	r.HandleFunc("/", indexHandler)
+	//r.HandleFunc("/validate", validateHandler)
+	r.HandleFunc("/getuser", getUserHandler)
+	r.HandleFunc("/getinfo", getName)
+	r.PathPrefix("/public/").Handler(s)
+
+	fmt.Println("staring server at port 8082")
+
+	http.ListenAndServe(":8082", r)
 }

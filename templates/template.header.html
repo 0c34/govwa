@@ -1,0 +1,54 @@
+{{define "template.header"}}
+<html>
+<head>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <title>{{.coba}}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body{
+          padding-top: 5px;
+        }
+        .mini-submenu{
+            display:none;  
+            background-color: rgba(0, 0, 0, 0);  
+            border: 1px solid rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            padding: 9px;  
+            /*position: relative;*/
+            width: 42px;
+
+            }
+
+            .mini-submenu:hover{
+            cursor: pointer;
+            }
+
+            .mini-submenu .icon-bar {
+            border-radius: 1px;
+            display: block;
+            height: 2px;
+            width: 22px;
+            margin-top: 3px;
+            }
+
+            .mini-submenu .icon-bar {
+            background-color: #000;
+            }
+
+            #slide-submenu{
+            background: rgba(0, 0, 0, 0.45);
+            display: inline-block;
+            padding: 0 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+  <div class="container">
+  <nav class="navbar navbar-default" role="navigation">
+  </nav>
+{{end}}
