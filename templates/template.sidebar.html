@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-4 col-md-3 sidebar">
         <div class="nav-side-menu">
-            <div class="brand">Brand Logo</div>
+            <div class="brand"><img src="{{.weburl}}public/img/go-icon.ico">Vulnerabilities</div>
             <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
             <div class="menu-list">
@@ -10,41 +10,41 @@
                 <ul id="menu-content" class="menu-content collapse out">
                     <li>
                         <a href="#">
-                            <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                            <i class="fa fa-dashboard fa-lg"></i> Home
                         </a>
                     </li>
 
-                    <li data-toggle="collapse" data-target="#service" class="collapsed">
-                        <a href="#"><i class="fa fa-globe fa-lg"></i> Services <span class="arrow"></span></a>
+                    <li data-toggle="collapse" data-target="#sqli" class="collapsed">
+                        <a href="#"><i class="fa fa-bug fa-lg"></i> SQL Injection <span class="arrow"></span></a>
                     </li>
-                    <ul class="sub-menu collapse" id="service">
-                        <li>New Service 1</li>
-                        <li>New Service 2</li>
-                        <li>New Service 3</li>
+                    <ul class="sub-menu collapse" id="sqli">
+                        <li><a href="#">SQLI 1</a></li>
+                        <li><a href="#">SQLI 2</a></li>
                     </ul>
 
 
-                    <li data-toggle="collapse" data-target="#new" class="collapsed">
-                        <a href="#"><i class="fa fa-globe fa-lg"></i> New <span class="arrow"></span></a>
+                    <li data-toggle="collapse" data-target="#xss" class="collapsed">
+                        <a href="#"><i class="fa fa-bug fa-lg"></i> Cross Site Scripting <span class="arrow"></span></a>
                     </li>
-                    <ul class="sub-menu collapse" id="new">
-                        <li>New New 1</li>
-                        <li>New New 2</li>
-                        <li>New New 3</li>
+                    <ul class="sub-menu collapse" id="xss">
+                        <li><a href="#">XSS 1</a></li>
+                        <li><a href="#">XSS 2</a></li>
                     </ul>
 
 
                     <li>
                         <a href="#">
-                            <i class="fa fa-user fa-lg"></i> Profile
+                            <i class="fa fa-bug fa-lg"></i> IDOR
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-users fa-lg"></i> Users
-                        </a>
+                    <li data-toggle="collapse" data-target="#csrf" class="collapsed">
+                        <a href="#"><i class="fa fa-bug fa-lg"></i> CSRF <span class="arrow"></span></a>
                     </li>
+                    <ul class="sub-menu collapse" id="csrf">
+                        <li><a href="#">CSRF 1</a></li>
+                        <li><a href="#">CSRF 2</a></li>
+                    </ul>
                 </ul>
             </div>
         </div>

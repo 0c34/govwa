@@ -41,11 +41,13 @@ func getName(w http.ResponseWriter, r *http.Request) {
 }
 
 //index and set cookie
+
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	cookie := util.SetCookieLevel(w, r)
 	data := make(map[string]interface{})
 	data["level"] = cookie
 	data["title"] = "Index"
+	data["weburl"] = util.Fullurl
 	util.SafeRender(w,"template.index", data)
 }
 
@@ -53,7 +55,6 @@ func main() {
 	s := http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))) //public directory
 	r := mux.NewRouter()
 	r.HandleFunc("/", indexHandler)
-	r.HandleFunc("/index", indexHandler)
 	r.HandleFunc("/getuser", getUserHandler)
 	r.HandleFunc("/getinfo", getName)
 	r.PathPrefix("/public/").Handler(s)

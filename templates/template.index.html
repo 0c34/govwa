@@ -1,27 +1,16 @@
 {{define "template.index"}}
-<html>
-{{template "template.header" .}} {{template "template.sidebar" .}}
+{{template "template.header" .}} 
+{{template "template.sidebar" .}}
 <div class="col-md-9">
     <div class="panel panel-primary">
-        <div class="panel-heading">Set Level</div>
+        <div class="panel-heading"></div>
         <div class="panel-body">
-            <form action="http://localhost:8082/index" method="POST">
-                <div class="form-group">
-                    <label for="email">Set Level:</label>
-                    <select name="level">
-                        <option value="low">Low</option>
-                        <option value="high">High</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input class="btn btn-default" type="submit" value="Send">
-                </div>
-            </form>
-            <div class="level">Level : <b>{{.level}}</b></div>
-            <a class="btn btn-small btn-default" href="http://localhost:8082/validate">Input Validation</a>
-            <a class="btn btn-small btn-default" href="http://localhost:8082/getinfo?name=tes">XSS</a>
-            <a class="btn btn-small btn-default" href="http://localhost:8082/getuser?uid=1">SQL Injection</a>
+            <div class="pnl">
+                <h2>Wolcome To GOVWA</h2>
+            <p>
+            </p>
+        </div>
+        </div>    
         </div>
     </div>
-</div>
 {{template "template.footer"}} {{ end }}

@@ -1,0 +1,9 @@
+{
+    "user" : "gosec",
+    "password" : "gosec321",
+    "dbname" :"gosec",
+    "sqlhost" : "192.168.56.101",
+    "sqlport" : "3306",
+    "webserver" : "http://localhost",
+    "webport" : "8082"
+}
