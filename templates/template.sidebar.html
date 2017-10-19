@@ -1,21 +1,52 @@
 {{ define "template.sidebar" }}
-    <div class="row">
-        <div class="col-sm-4 col-md-3 sidebar">
-    <div class="mini-submenu">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+<div class="row">
+    <div class="col-sm-4 col-md-3 sidebar">
+        <div class="nav-side-menu">
+            <div class="brand">Brand Logo</div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                        </a>
+                    </li>
+
+                    <li data-toggle="collapse" data-target="#service" class="collapsed">
+                        <a href="#"><i class="fa fa-globe fa-lg"></i> Services <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="service">
+                        <li>New Service 1</li>
+                        <li>New Service 2</li>
+                        <li>New Service 3</li>
+                    </ul>
+
+
+                    <li data-toggle="collapse" data-target="#new" class="collapsed">
+                        <a href="#"><i class="fa fa-globe fa-lg"></i> New <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="new">
+                        <li>New New 1</li>
+                        <li>New New 2</li>
+                        <li>New New 3</li>
+                    </ul>
+
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user fa-lg"></i> Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users fa-lg"></i> Users
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="list-group">
-        <span href="#" class="list-group-item active">Vulnerabilities 
-        <span class="pull-right" id="slide-submenu"><i class="fa fa-times"></i></span>
-        </span>
-        <a href="#" class="list-group-item"><i class="fa fa-bug fa-fw"></i> SQLI </a>
-        <a href="#" class="list-group-item"><i class="fa fa-bug fa-fw"></i> XSS 1</a>
-        <a href="#" class="list-group-item"><i class="fa fa-bug fa-fw"></i> XSS 2 </a>
-        <a href="#" class="list-group-item"><i class="fa fa-bug fa-fw"></i> XSS 3</span></a>
-        <a href="#" class="list-group-item"><i class="fa fa-bug fa-fw"></i> IDOR </span></a>
-        <a href="#" class="list-group-item"><i class="fa fa-bug fa-fw"></i> CSRF </a>
-    </div>        
-    </div>
-{{ end }}
+    {{ end }}

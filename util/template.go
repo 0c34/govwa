@@ -28,9 +28,3 @@ func UnSafeRender(w http.ResponseWriter, name string, data ...interface{}) {
 	template := template.Must(template.ParseGlob("templates/*"))
 	template.ExecuteTemplate(w, name, data)
 }
-func TempRender(w http.ResponseWriter) {
-	data := make(map[string]interface{})
-	data["coba"] = "coba"
-	template := template.Must(template.ParseGlob("templates/*"))
-	template.ExecuteTemplate(w, "template.index", data)
-}
