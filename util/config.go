@@ -14,6 +14,7 @@ type config struct{
 	Sqlport string
 	Webserver string
 	Webport string
+	Sessionkey string
 }
 
 var Cfg *config
