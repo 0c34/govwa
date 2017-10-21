@@ -1,16 +1,17 @@
 {{define "template.login"}}
 <html>
-    <head>
-        <title>{{.Title}}</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<head>
+    <title>{{.Title}}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
-        body{
+        body {
             padding-top: 30px;
         }
     </style>
-    </head>
+</head>
 
 <body>
     <div class="container">
@@ -21,22 +22,25 @@
                         <h3 class="panel-title">GOVWA User Login</h3>
                     </div>
                     <div class="panel-body">
-                            <form action="" role="form" method="post" accept-charset="utf-8">
+                        <form action="" role="form" method="post" accept-charset="utf-8">
                             <fieldset>
-                                 <div class="form-group">
-                                    <input type="text" name="identity" value=""  class="form-control" placeholder="username" />
-                                  </div>
-                                  <div class="form-group">
-                                    <input type="password" name="password" value=""  class="form-control" placeholder="Password" />
-                                  </div>
-                                  <input type="submit" name="submit" value="Log in"  class="btn btn-success btn-lg btn-block" />
+                                <div class="form-group">
+                                    <input type="text" name="identity" value="" class="form-control" placeholder="username" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" value="" class="form-control" placeholder="Password" />
+                                </div>
+                                <input type="submit" name="submit" value="Log in" class="btn btn-success btn-lg btn-block" />
                             </fieldset>
-                          </form>                    
-                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+</script>
+
 </html>
 {{end}}
