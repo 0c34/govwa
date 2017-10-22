@@ -1,8 +1,9 @@
 package session
 
 import (
-	"log"
+
 	"govwa/util"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/sessions"
@@ -30,30 +31,29 @@ func (self *Self) SetSession(w http.ResponseWriter, r *http.Request, data map[st
 	}
 
 	session.Values["govwa_session"] = true
-
-	err = session.Save(r, w) //safe session and send it to client as cookie
-
-	if err != nil {
-		log.Println(err.Error())
-	}
-
+	session.Values["asu"] = "coba"
 	//create new session to store on server side
-	if data != nil{
+	if data != nil {
 		for key, value := range data {
 			session.Values[key] = value
 		}
 	}
-
+	err = session.Save(r, w) //safe session and send it to client as cookie
+	
+		if err != nil {
+			log.Println(err.Error())
+		}
 }
 
-func (self *Self) GetSession(r *http.Request, key string) interface{} {
+func (self *Self) GetSession(r *http.Request, key string) interface{}  {
 	session, err := store.Get(r, "govwa")
 
 	if err != nil {
 		log.Println(err.Error())
 		return nil
 	}
-	return session.Values[key]
+	data := session.Values[key]
+	return data
 }
 
 func (self *Self) DeleteSession(w http.ResponseWriter, r *http.Request) {
@@ -62,18 +62,13 @@ func (self *Self) DeleteSession(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 	}
 
-	session.Options = &sessions.Options{
-		Path:     "/",
-		MaxAge:   -1,
-		HttpOnly: true,
-	}
-	session.Values["govwa_session"] = true
+	session.Values["govwa_session"] = false
 	err = session.Save(r, w) //safe session and send it to client as cookie
-	
-		if err != nil {
-			log.Println(err.Error())
-		}
-	
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+
 	return
 }
 
@@ -86,4 +81,15 @@ func (self *Self) IsLoggedIn(r *http.Request) bool {
 		return false
 	}
 	return true
+}
+
+
+func init(){
+	store.Options = &sessions.Options{
+		//Domain : util.Cfg.Webserver,
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+	}
+
 }

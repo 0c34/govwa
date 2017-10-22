@@ -1,23 +1,24 @@
 package user
 
 import (
-	"log"
-	"fmt"
-	"net/http"
 	"crypto/md5"
-	"encoding/hex"
-	"html/template"
 	"database/sql"
+	"encoding/hex"
+	"fmt"
+	"html/template"
+	"log"
+	"net/http"
+	"strconv"
 
-	"govwa/util"
 	"govwa/user/session"
-	"govwa/util/middleware"
+	"govwa/util"
 	"govwa/util/database"
+	"govwa/util/middleware"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-/* 
+/*
 uname : admin
 pass : govwaadmin
 
@@ -57,9 +58,9 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 	}
 
 	if r.Method == "POST" {
-		if loginAction(w, r, ps){
+		if loginAction(w, r, ps) {
 			util.Redirect(w, r, "index", 302)
-		}else{
+		} else {
 			//the best solution instead of using ajax request
 			data["message"] = template.HTML("<div id=\"message\" class=\"alert alert-danger\"><p>Incorrect Username or Password</p></div>")
 			log.Println("Login Failed")
@@ -68,14 +69,22 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 	util.SafeRender(w, "template.login", data)
 }
 
-func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bool{
+func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bool {
 
 	/* handler for login action */
 	uname := r.FormValue("username")
 	pass := Md5Sum(r.FormValue("password"))
-	if checkUserQuery(uname, pass) == 1 {
+
+	uData := checkUserQuery(uname, pass) //handle user data from db
+	if uData.cnt == 1 {
 		s := session.New()
-		s.SetSession(w, r, nil)
+
+		/* save user data to session */
+		sessionData := make(map[string]string)
+		sessionData["uname"] = uData.uname
+		sessionData["id"] = strconv.Itoa(uData.id)
+
+		s.SetSession(w, r, sessionData)
 		log.Println("Login Success")
 		return true
 	} else {
@@ -89,28 +98,36 @@ func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	util.Redirect(w, r, "login", 302)
 }
 
+/* type to handle user data that return form query */
+type UserData struct {
+	id    int
+	uname string
+	cnt int
+}
+
 var db *sql.DB
-func checkUserQuery(username,pass string)int{
+
+func checkUserQuery(username, pass string) *UserData {
 	/* this function will check rows num which return from query */
 	db, err := database.Connect()
-	if err != nil{
+	if err != nil {
 		log.Println(err.Error())
 	}
 
-	var count int
+	var uData = UserData{} //inisialize empty userdata
 
-	sql := fmt.Sprintf(`SELECT COUNT(*) 
+	sql := fmt.Sprintf(`SELECT id, uname, COUNT(*) as cnt
 						FROM Users 
 						WHERE uname=? 
 						AND pass=?`)
 
-	stmt,err := db.Prepare(sql)
-	if err != nil{
-		fmt.Println(err.Error())
+	stmt, err := db.Prepare(sql)
+	if err != nil {
+		log.Println(err.Error())
 	}
 	defer stmt.Close()
-	err = stmt.QueryRow(username,pass).Scan(&count)
-	return count
+	err = stmt.QueryRow(username, pass).Scan(&uData.id, &uData.uname, &uData.cnt)
+	return &uData
 
 }
 

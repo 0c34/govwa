@@ -9,6 +9,7 @@ import (
 	"govwa/util"
 	"govwa/util/middleware"
 	"govwa/user"
+	"govwa/user/session"
 )
 
 //index and set cookie
@@ -16,9 +17,14 @@ import (
 func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	cookie := util.SetCookieLevel(w, r)
 	data := make(map[string]interface{})
+	
+	s := session.New()
+	uname := s.GetSession(r, "uname")
+	
 	data["level"] = cookie
 	data["title"] = "Index"
 	data["weburl"] = util.Fullurl
+	data["uname"] = uname
 
 	fmt.Println(r.FormValue("govwa_session"))
 	util.SafeRender(w,"template.index", data)
