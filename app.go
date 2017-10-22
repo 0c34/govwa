@@ -32,6 +32,7 @@ func main() {
 
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
+	router.GET("/index", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
 
 	userObj.SetRouter(router)
 
@@ -39,6 +40,7 @@ func main() {
 		Addr : ":8082",
 		Handler : router,
 	}
+
 	fmt.Printf("Server running at port %s\n", s.Addr)
 	s.ListenAndServe()
 
