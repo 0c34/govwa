@@ -9,11 +9,17 @@
 
                 <ul id="menu-content" class="menu-content collapse out">
                     <li>
-                        <a href="#">
+                        <a href="{{.weburl}}index">
                             <i class="fa fa-dashboard fa-lg"></i> Home
                         </a>
                     </li>
 
+                    <li>
+                            <a href="{{.weburl}}index">
+                                <i class="glyphicon glyphicon-cog fa-lg"></i> Setup
+                            </a>
+                    </li>
+                    <li style="height:35px"></li>
                     <li data-toggle="collapse" data-target="#sqli" class="collapsed">
                         <a href="#"><i class="fa fa-bug fa-lg"></i> SQL Injection <span class="arrow"></span></a>
                     </li>
@@ -31,12 +37,13 @@
                         <li><a href="#">XSS 2</a></li>
                     </ul>
 
-
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-bug fa-lg"></i> IDOR
-                        </a>
-                    </li>
+                    <li data-toggle="collapse" data-target="#idor" class="collapsed">
+                            <a href="#"><i class="fa fa-bug fa-lg"></i> IDOR <span class="arrow"></span></a>
+                        </li>
+                        <ul class="sub-menu collapse" id="idor">
+                            <li><a href="#">IDOR 1</a></li>
+                            <li><a href="#">IDOR 2</a></li>
+                        </ul>
 
                     <li data-toggle="collapse" data-target="#csrf" class="collapsed">
                         <a href="#"><i class="fa fa-bug fa-lg"></i> XXE <span class="arrow"></span></a>
@@ -45,6 +52,16 @@
                         <li><a href="#">XXE 1</a></li>
                         <li><a href="#">XXE 2</a></li>
                     </ul>
+                    <li style="height:35px">
+                    </li>
+                    <li>
+                            <a href="{{.weburl}}logout">
+                                <i class="fa fa-sign-out fa-lg"></i> Logout
+                            </a>
+                        </li>
+                    <li style="height:35px">
+                        <span>tes</span>
+                    </li>
                 </ul>
             </div>
         </div>
