@@ -133,6 +133,12 @@ html,body {
     transition: all 2s ease; */
 }
 
+.nav-side-menu li span{
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 200;
+    color: #18191A;
+}
 @media (max-width: 767px) {
     .nav-side-menu {
         position: relative;
