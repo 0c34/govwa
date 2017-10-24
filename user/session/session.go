@@ -27,7 +27,7 @@ func (self *Self) SetSession(w http.ResponseWriter, r *http.Request, data map[st
 	session.Options = &sessions.Options{
 		Path:     "/",
 		MaxAge:   86400,
-		HttpOnly: true,
+		HttpOnly: false, //set to false for xss :) 
 	}
 
 	session.Values["govwa_session"] = true
@@ -84,12 +84,11 @@ func (self *Self) IsLoggedIn(r *http.Request) bool {
 }
 
 
-func init(){
+/* func init(){
 	store.Options = &sessions.Options{
-		//Domain : util.Cfg.Webserver,
 		Path:     "/",
 		MaxAge:   -1,
 		HttpOnly: true,
 	}
 
-}
+} */

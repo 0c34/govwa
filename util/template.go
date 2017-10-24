@@ -1,6 +1,7 @@
 package util
 
 import (
+	"log"
 	"encoding/json"
 	"html/template"
 	"net/http"
@@ -9,7 +10,10 @@ import (
 func SafeRender(w http.ResponseWriter, name string, data map[string]interface{}) {
 
 	template := template.Must(template.ParseGlob("templates/*"))
-	template.ExecuteTemplate(w, name, data)
+	err := template.ExecuteTemplate(w, name, data)
+	if err != nil{
+		log.Println(err.Error())
+	}
 }
 
 func RenderAsJson(w http.ResponseWriter, data ...interface{}) {

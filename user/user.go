@@ -89,6 +89,8 @@ func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bo
 		sessionData["uname"] = uData.uname
 		sessionData["id"] = strconv.Itoa(uData.id)
 
+		util.SetCookie(w, "Uid", strconv.Itoa(uData.id)) //save user_id to cookie
+
 		s.SetSession(w, r, sessionData)
 		log.Println("Login Success")
 		return true
@@ -100,6 +102,8 @@ func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bo
 func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	s := session.New()
 	s.DeleteSession(w, r)
+	cookies := []string{"Level", "Uid"}
+	util.DeleteCookie(w,cookies)
 	util.Redirect(w, r, "login", 302)
 }
 
