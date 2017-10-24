@@ -23,3 +23,5 @@ func CheckLevel(r *http.Request) bool {
 		return false // level == low
 	}
 }
+
+tes
