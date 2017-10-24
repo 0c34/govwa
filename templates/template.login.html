@@ -1,14 +1,17 @@
 {{define "template.login"}}
-<!DOCTYPE html>
 <html>
+
 <head>
     <title>{{.Title}}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
+        html,
         body {
-            padding-top: 30px;
+            padding: 30px;
+            height: 100%;
+            background: #f4f4f4;
         }
     </style>
 </head>
@@ -19,7 +22,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title" style="text-align:center">GoVWA User Login</h3>
+                        <h3 class="panel-title">GOVWA User Login</h3>
                     </div>
                     <div class="panel-body">
                         {{.message}}
@@ -41,7 +44,7 @@
     </div>
 </body>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $("#message").delay(2000).fadeOut();
     });
 </script>

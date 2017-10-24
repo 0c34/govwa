@@ -58,12 +58,17 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 	}
 
 	if r.Method == "POST" {
-		if loginAction(w, r, ps) {
-			util.Redirect(w, r, "index", 302)
-		} else {
-			//the best solution instead of using ajax request
-			data["message"] = template.HTML("<div id=\"message\" class=\"alert alert-danger\"><p>Incorrect Username or Password</p></div>")
-			log.Println("Login Failed")
+
+		if !validateForm(w,r,ps) {
+			data["message"] = template.HTML("<div id=\"message\" class=\"alert alert-danger\"><p>Empty Username or Password</p></div>")
+		}else{
+			if loginAction(w, r, ps) {
+				util.Redirect(w, r, "index", 302)
+			} else {
+				//the best solution instead of using ajax request
+				data["message"] = template.HTML("<div id=\"message\" class=\"alert alert-danger\"><p>Incorrect Username or Password</p></div>")
+				log.Println("Login Failed")
+			}
 		}
 	}
 	util.SafeRender(w, "template.login", data)
@@ -96,6 +101,15 @@ func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	s := session.New()
 	s.DeleteSession(w, r)
 	util.Redirect(w, r, "login", 302)
+}
+
+func validateForm(w http.ResponseWriter, r *http.Request, _ httprouter.Params)bool{
+	uname := r.FormValue("username")
+	pass := r.FormValue("password")
+	if uname == "" || pass == ""{
+		return false
+	}
+	return true
 }
 
 /* type to handle user data that return form query */
