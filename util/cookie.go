@@ -16,10 +16,10 @@ func SetCookieLevel(w http.ResponseWriter, r *http.Request) string {
 }
 
 func CheckLevel(r *http.Request) bool {
-	level, _ := r.Cookie("level")
-	if level.Value == "" || level.Value == "low" {
+	level := GetCookie(r, "Level")
+	if level == "" || level == "low" {
 		return false //set default level to low
-	} else if level.Value == "high" {
+	} else if level == "high" {
 		return true //level == high
 	} else {
 		return false // level == low
