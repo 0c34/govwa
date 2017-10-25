@@ -55,11 +55,11 @@ func main() {
 
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
-	router.GET("/index", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
+	router.GET("/index", mw.LoggingMiddleware(mw.DetectSQLMap(mw.AuthCheck(indexHandler))))
 
 	userObj.SetRouter(router)
 	sqlI.SetRouter(router)
-	
+
 	s := http.Server{
 		Addr : ":8082",
 		Handler : router,
