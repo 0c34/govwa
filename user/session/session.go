@@ -4,6 +4,7 @@ import (
 
 	"govwa/util"
 	"log"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/sessions"
@@ -45,15 +46,16 @@ func (self *Self) SetSession(w http.ResponseWriter, r *http.Request, data map[st
 		}
 }
 
-func (self *Self) GetSession(r *http.Request, key string) interface{}  {
+func (self *Self) GetSession(r *http.Request, key string) string  {
 	session, err := store.Get(r, "govwa")
 
 	if err != nil {
 		log.Println(err.Error())
-		return nil
+		return ""
 	}
 	data := session.Values[key]
-	return data
+	sv := fmt.Sprintf("%v", data)
+	return sv
 }
 
 func (self *Self) DeleteSession(w http.ResponseWriter, r *http.Request) {
