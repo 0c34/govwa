@@ -6,11 +6,9 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
+	"govwa/user"
 	"govwa/util"
 	"govwa/util/middleware"
-	"govwa/user"
-	"govwa/user/session"
-
 	"govwa/vulnerability/sqli"
 )
 
@@ -32,17 +30,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	cookie := util.SetCookieLevel(w, r)
 	data := make(map[string]interface{})
 	
-	s := session.New()
-	uname := s.GetSession(r, "uname")
-	id := s.GetSession(r, "id")
-	
 	data["level"] = cookie
 	data["title"] = "Index"
-	data["weburl"] = util.Fullurl
-	data["uname"] = uname
-	data["uid"] = id
 
-	fmt.Println(r.FormValue("govwa_session"))
 	util.SafeRender(w,"template.index", data)
 }
 
@@ -50,14 +40,14 @@ func main() {
 	fmt.Println(banner)
 	mw := middleware.New()
 	router := httprouter.New()
-	userObj := user.New()
+	user := user.New()
 	sqlI := sqli.New()
 
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
 	router.GET("/index", mw.LoggingMiddleware(mw.DetectSQLMap(mw.AuthCheck(indexHandler))))
 
-	userObj.SetRouter(router)
+	user.SetRouter(router)
 	sqlI.SetRouter(router)
 
 	s := http.Server{
