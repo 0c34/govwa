@@ -1,24 +1,16 @@
-{{define "template.sqli"}} 
-{{template "template.header" .}} 
-{{template "template.sidebar" .}}
+{{define "template.sqli"}} {{template "template.header" .}} {{template "template.sidebar" .}}
 <div class="col-md-9">
     <div class="panel panel-primary">
         <div class="panel-heading">SQL Injection</div>
         <div class="panel-body">
             <div class="pnl">
-                <span class="subheader">SQL Injection Vulnerability</span>
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
                 <p>
-                    data :
-                    {{.error}}
-                    {{.name}}
-                    {{.city}}
-                    {{.number}}
-                    {{.uid}}
+                    data : {{.error}} {{.name}} {{.city}} {{.number}} {{.uid}}
 
                 </p>
             </div>
         </div>
     </div>
 </div>
-{{template "template.footer"}} 
-{{ end }}
+{{template "template.footer"}} {{ end }}

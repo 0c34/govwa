@@ -3,6 +3,7 @@ package middleware
 import(
 	"log"
 	"time"
+	"errors"
 	"net/http"
 
 	"govwa/user/session"
@@ -36,6 +37,28 @@ func (this *Class) AuthCheck(h httprouter.Handle) httprouter.Handle {
 			return
 		}
 
+		h(w, r, ps)
+	}
+}
+
+func (this *Class)CapturePanic(h httprouter.Handle) httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		var err error
+		defer func() {
+            r := recover()
+            if r != nil {
+                switch t := r.(type) {
+                case string:
+                    err = errors.New(t)
+                case error:
+                    err = t
+                default:
+                    err = errors.New("Unknown error")
+				}
+				log.Println(err.Error())
+                http.Error(w, err.Error(), http.StatusInternalServerError)
+			}
+		}()
 		h(w, r, ps)
 	}
 }

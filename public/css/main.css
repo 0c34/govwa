@@ -4,12 +4,14 @@ body {
     height: 100%;
     background: #f4f4f4;
 }
-.header{
+
+.header {
     background-image: url("http://localhost:8082/public/img/header.png");
     width: 1140px;
     height: 100px;
     margin-bottom: 20px;
 }
+
 .nav-side-menu {
     overflow: auto;
     font-family: verdana;
@@ -22,7 +24,6 @@ body {
     border: 1px solid #428bca;
     color: #000;
     border-radius: 4px;
-    margin-bottom: 20px
 }
 
 .nav-side-menu .brand {
@@ -237,6 +238,7 @@ body {
 
 .footer {
     position: relative;
+    margin-top: 10px;
     bottom: 0;
     /* width: 100%; */
     /* Set the fixed height of the footer here */
