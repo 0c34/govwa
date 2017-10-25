@@ -4,10 +4,11 @@ import(
 	"log"
 	"time"
 	"errors"
+	"regexp"
 	"net/http"
 
-	"govwa/user/session"
 	"govwa/util"
+	"govwa/user/session"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -60,5 +61,20 @@ func (this *Class)CapturePanic(h httprouter.Handle) httprouter.Handle {
 			}
 		}()
 		h(w, r, ps)
+	}
+}
+
+func(this *Class)DetectSQLMap(h httprouter.Handle)httprouter.Handle{
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		userAgent := r.Header.Get("User-Agent")
+		sqlmapDetected, _ := regexp.MatchString("sqlmap*", userAgent)
+		if sqlmapDetected{
+			w.WriteHeader(http.StatusForbidden)
+			w.Write([]byte("Forbidden"))
+			log.Printf("sqlmap detect ")
+			return
+		}else{
+			h(w, r, ps)
+		}
 	}
 }
