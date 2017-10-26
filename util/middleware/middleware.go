@@ -50,9 +50,11 @@ func (this *Class)CapturePanic(h httprouter.Handle) httprouter.Handle {
             if r != nil {
                 switch t := r.(type) {
                 case string:
-                    err = errors.New(t)
+					err = errors.New(t)
+					log.Println("error string")
                 case error:
-                    err = t
+					err = t
+					log.Println("error t")
                 default:
                     err = errors.New("Unknown error")
 				}

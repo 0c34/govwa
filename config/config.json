@@ -1,11 +1,11 @@
 {
-    "user" : "gosec",
-    "password" : "gosec321",
-    "dbname" :"govwa",
-    "sqlhost" : "192.168.56.101",
-    "sqlport" : "3306",
-    "webserver" : "http://localhost",
-    "webport" : "8082",
+    "user": "gosec",
+    "password": "gosec321",
+    "dbname": "govwa",
+    "sqlhost": "192.168.56.101",
+    "sqlport": "3306",
+    "webserver": "http://localhost",
+    "webport": "8082",
 
-    "sessionkey:" : "G0Vw444"
+    "sessionkey:": "G0Vw444"
 }
