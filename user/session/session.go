@@ -27,12 +27,12 @@ func (self *Self) SetSession(w http.ResponseWriter, r *http.Request, data map[st
 
 	session.Options = &sessions.Options{
 		Path:     "/",
-		MaxAge:   86400,
+		MaxAge:   3600,
 		HttpOnly: false, //set to false for xss :) 
 	}
 
 	session.Values["govwa_session"] = true
-	session.Values["asu"] = "coba"
+
 	//create new session to store on server side
 	if data != nil {
 		for key, value := range data {
@@ -63,6 +63,11 @@ func (self *Self) DeleteSession(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err.Error())
 	}
+	
+	session.Options = &sessions.Options{
+		MaxAge:   -1,
+		HttpOnly: false, //set to false for xss :) 
+	}
 
 	session.Values["govwa_session"] = false
 	err = session.Save(r, w) //safe session and send it to client as cookie
@@ -84,13 +89,3 @@ func (self *Self) IsLoggedIn(r *http.Request) bool {
 	}
 	return true
 }
-
-
-/* func init(){
-	store.Options = &sessions.Options{
-		Path:     "/",
-		MaxAge:   -1,
-		HttpOnly: true,
-	}
-
-} */
