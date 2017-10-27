@@ -10,6 +10,7 @@ import (
 	"govwa/util"
 	"govwa/util/middleware"
 	"govwa/vulnerability/sqli"
+	"govwa/vulnerability/xss"
 )
 
 const (
@@ -42,6 +43,7 @@ func main() {
 	router := httprouter.New()
 	user := user.New()
 	sqlI := sqli.New()
+	xss := xss.New()
 
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
@@ -49,6 +51,7 @@ func main() {
 
 	user.SetRouter(router)
 	sqlI.SetRouter(router)
+	xss.SetRouter(router)
 
 	s := http.Server{
 		Addr : ":8082",
