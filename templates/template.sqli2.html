@@ -1,12 +1,13 @@
-{{define "template.sqli"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+{{define "template.sqli2"}} {{template "template.header" .}} {{template "template.sidebar" .}}
 <div class="col-md-9">
     <div class="panel panel-primary">
         <div class="panel-heading">SQL Injection Vulnerability</div>
         <div class="panel-body">
             <div class="pnl">
                 <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>Mastering your SQLMap</p>
                 <p>Your Profile :</p>
-                <div class="well">{{.error}} 
+                <div class="well">
                     <ul>
                         <li>Uid  : {{.uid}}</li>
                         <li>Name : {{.name}}</li>

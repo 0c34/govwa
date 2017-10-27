@@ -1,0 +1,23 @@
+{{define "template.sqli1"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">SQL Injection Vulnerability</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>This should be safe</p>
+                <p>Your Profile :</p>
+                <div class="well">
+                    {{.error}} 
+                    <ul>
+                        <li>Uid  : {{.uid}}</li>
+                        <li>Name : {{.name}}</li>
+                        <li>City : {{.city}} </li>
+                        <li>Number : {{.number}} </li>
+                    </ul>
+                    </div>    
+            </div>
+        </div>
+    </div>
+</div>
+{{template "template.footer"}} {{ end }}
