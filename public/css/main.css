@@ -229,8 +229,7 @@ body {
     line-height: 30px;
 }
 .pnl a {
-    color: #ff9900;
-    background: #fff4a3;
+    color: #428bca;
     text-decoration: none;
 }
 
@@ -245,11 +244,10 @@ body {
     position: relative;
     margin-top: 10px;
     bottom: 0;
-    /* width: 100%; */
-    /* Set the fixed height of the footer here */
+    text-align: center;
+    color: white;
     height: 60px;
     line-height: 60px;
-    /* Vertically center the text there */
     background-color: #428bca;
 }
 
