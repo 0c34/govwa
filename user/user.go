@@ -39,8 +39,8 @@ func (self *Self) SetRouter(r *httprouter.Router) {
 
 	mw := middleware.New() //implement middleware
 
-	r.GET("/login", mw.LoggingMiddleware(LoginViewHandler))
-	r.POST("/login", mw.LoggingMiddleware(LoginViewHandler))
+	r.GET("/login", mw.LoggingMiddleware(mw.CapturePanic(LoginViewHandler)))
+	r.POST("/login", mw.LoggingMiddleware(mw.CapturePanic(LoginViewHandler)))
 	r.GET("/logout", mw.LoggingMiddleware(Logout))
 }
 
@@ -48,6 +48,11 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 
 	/* handler for login view */
 
+	/* check database for setup */
+	ok := database.CheckDatabase()
+	if !ok{
+		util.Redirect(w, r, "setup", 302) //if no database will redirect to setup page
+	}
 	/* value of data will send to client over template */
 	data := make(map[string]interface{})
 	data["Title"] = "Login"
