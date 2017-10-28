@@ -1,4 +1,4 @@
-package util
+package config
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 )
 
-type config struct{
+type Config struct{
 	User string
 	Password string
 	Dbname string
@@ -17,15 +17,15 @@ type config struct{
 	Sessionkey string
 }
 
-var Cfg *config
+var Cfg *Config
 var Fullurl string
 
-func LoadConfig()*config{
+func LoadConfig()*Config{
 	raw, err := ioutil.ReadFile("config/config.json")
 	if err != nil{
 		fmt.Println(err.Error())
 	}
-	configuration := config{}
+	configuration := Config{}
 	err = json.Unmarshal(raw, &configuration)
 	return &configuration
 }

@@ -2,12 +2,18 @@ package util
 
 import (
 	"log"
+	"net/http"
 	"encoding/json"
 	"html/template"
-	"net/http"
+
+	"govwa/user/session"
 )
 
-func SafeRender(w http.ResponseWriter, name string, data map[string]interface{}) {
+func SafeRender(w http.ResponseWriter, r *http.Request, name string, data map[string]interface{}) {
+
+	s := session.New()
+	sid := s.GetSession(r, "id")//make uid available to all page
+	data["uid"] = sid
 
 	template := template.Must(template.ParseGlob("templates/*"))
 	err := template.ExecuteTemplate(w, name, data)
