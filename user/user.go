@@ -1,17 +1,19 @@
 package user
 
 import (
-	"crypto/md5"
-	"database/sql"
-	"encoding/hex"
+
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"strconv"
+	"crypto/md5"
+	"database/sql"
+	"encoding/hex"
+	"html/template"
 
-	"govwa/user/session"
 	"govwa/util"
+	"govwa/util/config"
+	"govwa/user/session"
 	"govwa/util/database"
 	"govwa/util/middleware"
 
@@ -49,7 +51,7 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 	/* value of data will send to client over template */
 	data := make(map[string]interface{})
 	data["Title"] = "Login"
-	data["govwahost"] = util.Fullurl
+	data["govwahost"] = config.Fullurl
 
 	s := session.New()
 
@@ -71,7 +73,7 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 			}
 		}
 	}
-	util.SafeRender(w, "template.login", data)
+	util.SafeRender(w,r, "template.login", data)
 }
 
 func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bool {
