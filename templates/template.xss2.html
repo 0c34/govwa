@@ -1,0 +1,50 @@
+{{define "template.xss2"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+<!-- Modal -->
+<div id="profile" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">My Profile:</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Cross Site Scripting Vulnerability</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>All about javascript</p>
+                <p>Click button to view you profile:</p>
+                <div class="well">
+                    <button class="btn btn-small btn-primary" id="view">View</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+{{.inlineJS}}
+<script>
+    $(document).ready(function(){
+        $("#view").on('click', function(){
+            $("#profile").modal("show")
+            $('#profile').find('.modal-body').append('\
+                <p>name '+name+'</p>\
+                <p>City '+city+'</p>\
+                <p>Number'+number+'</p>\
+                ');
+        })
+        $("#profile").on('hidden.bs.modal', function(){
+            $('#profile').find('.modal-body').html("")
+        })
+    })
+</script>
+{{template "template.footer"}} {{ end }}
