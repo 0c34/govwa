@@ -34,7 +34,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	data["level"] = cookie
 	data["title"] = "Index"
 
-	util.SafeRender(w,"template.index", data)
+	util.SafeRender(w,r,"template.index", data)
 }
 
 func main() {
