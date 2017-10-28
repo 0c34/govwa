@@ -2,11 +2,11 @@ package session
 
 import (
 
-	"govwa/util"
+
 	"log"
 	"fmt"
 	"net/http"
-
+	"govwa/util/config"
 	"github.com/gorilla/sessions"
 )
 
@@ -16,7 +16,7 @@ func New() *Self {
 	return &Self{}
 }
 
-var store = sessions.NewCookieStore([]byte(util.Cfg.Sessionkey))
+var store = sessions.NewCookieStore([]byte(config.Cfg.Sessionkey))
 
 func (self *Self) SetSession(w http.ResponseWriter, r *http.Request, data map[string]string) {
 	session, err := store.Get(r, "govwa")
@@ -89,3 +89,4 @@ func (self *Self) IsLoggedIn(r *http.Request) bool {
 	}
 	return true
 }
+
