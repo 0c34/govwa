@@ -19,21 +19,23 @@ func Connect()(*sql.DB, error){
 }
 
 var DB *sql.DB
-func CheckDatabase()bool{
+func CheckDatabase()(bool, error){
+
 	/* this function use to check if no database selected and will redirect to setup page */
 	DB, err := Connect()
 	if err != nil{
 		log.Printf("Connection Error %s ",err.Error())
 	}
-	
+
 	sql := "USE govwa"
 	result, err := DB.Exec(sql)
 	if err != nil{
 		log.Println(err.Error())
+		return false,err
 	}
 	if result == nil{
-		return false
+		return false, err
 	}
 	log.Println(result)
-	return true
+	return true, nil
 }
