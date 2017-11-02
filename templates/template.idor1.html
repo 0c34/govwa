@@ -1,0 +1,81 @@
+{{define "template.idor1"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+<!-- update modal -->
+<div id="profile" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">My Profile:</h4>
+            </div>
+            <div class="modal-body">
+                  <form id="formdata" class="form-horizontal">
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Name:</label>
+                        <div class="col-sm-10">
+                          <input type="hidden" name="uid" id="uid" value="{{.uid}}">
+                          <input type="text" class="form-control" name="name" id="name" value="{{.name}}">
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="city">City:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="city" name="city" value="{{.city}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label col-sm-2" for="number">Num:</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="number" name="number" value="{{.number}}">
+                          </div>
+                        </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" id="update">Update</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Insecure Direct Object References Vulnerability</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>Protect the Cookie</p>
+                <p>Update Your Profile :</p>
+                <div class="well">
+                        <button class="btn btn-small btn-primary" id="view">View</button>
+                    </div>
+                <div id="alert" style="display: none"></div>    
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $("#view").on('click',function(){
+    $("#profile").modal("show");
+  });
+  $("#update").on('click', function(){
+    var data = $("#formdata").serialize()
+    var url = "{{.weburl}}idor1action"
+    $.post(url, data)
+    .done(function(res){
+      $("#profile").modal("hide");
+        if(res[0].status != 1){
+          $("#alert").addClass("alert alert-danger")
+          $("#alert").html(res[0].message)
+          $("#alert").show()
+          $("#alert").delay(2000).fadeOut();
+        }else{
+          $("#alert").addClass("alert alert-success")
+          $("#alert").html(res[0].message)
+          $("#alert").show()
+          $("#alert").delay(2000).fadeOut();
+        }
+    });
+  });
+</script>
+{{template "template.footer"}} {{ end }}
