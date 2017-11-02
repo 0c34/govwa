@@ -30,6 +30,8 @@ func CheckLevel(r *http.Request) bool {
 
 func SetCookie(w http.ResponseWriter, name, value string){
 	cookie := http.Cookie{
+		//Path : "/",
+		//Domain : "localhost",
 		Name: name, 
 		Value: value,
 	}
