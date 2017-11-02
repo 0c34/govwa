@@ -49,10 +49,11 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 	/* handler for login view */
 
 	/* check database for setup */
-	ok := database.CheckDatabase()
-	if !ok{
+	ok, err := database.CheckDatabase()
+	if !ok || err != nil{
 		util.Redirect(w, r, "setup", 302) //if no database will redirect to setup page
 	}
+	
 	/* value of data will send to client over template */
 	data := make(map[string]interface{})
 	data["Title"] = "Login"
