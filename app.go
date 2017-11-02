@@ -11,6 +11,7 @@ import (
 	"govwa/util/middleware"
 	"govwa/vulnerability/sqli"
 	"govwa/vulnerability/xss"
+	"govwa/vulnerability/idor"
 )
 
 const (
@@ -38,12 +39,15 @@ func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 }
 
 func main() {
+
 	fmt.Println(banner)
+	
 	mw := middleware.New()
 	router := httprouter.New()
 	user := user.New()
 	sqlI := sqli.New()
 	xss := xss.New()
+	idor := idor.New()
 
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
@@ -52,6 +56,7 @@ func main() {
 	user.SetRouter(router)
 	sqlI.SetRouter(router)
 	xss.SetRouter(router)
+	idor.SetRouter(router)
 
 	s := http.Server{
 		Addr : ":8082",
