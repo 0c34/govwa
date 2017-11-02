@@ -1,3 +1,4 @@
 # GoVwa
-will be release ASAP
+GoVWA almost released, 
+only need installation guideline
 
