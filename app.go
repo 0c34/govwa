@@ -6,6 +6,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
+	"govwa/setup"
 	"govwa/user"
 	"govwa/util"
 	"govwa/util/middleware"
@@ -48,6 +49,7 @@ func main() {
 	sqlI := sqli.New()
 	xss := xss.New()
 	idor := idor.New()
+	setup := setup.New()
 
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
@@ -57,6 +59,7 @@ func main() {
 	sqlI.SetRouter(router)
 	xss.SetRouter(router)
 	idor.SetRouter(router)
+	setup.SetRouter(router)
 
 	s := http.Server{
 		Addr : ":8082",
