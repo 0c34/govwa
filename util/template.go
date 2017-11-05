@@ -40,3 +40,7 @@ func UnSafeRender(w http.ResponseWriter, name string, data ...interface{}) {
 	template := template.Must(template.ParseGlob("templates/*"))
 	template.ExecuteTemplate(w, name, data)
 }
+
+func ToHTML(text string)template.HTML{
+	return template.HTML(text)
+}
