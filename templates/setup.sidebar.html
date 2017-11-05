@@ -1,0 +1,29 @@
+{{ define "setup.sidebar" }}
+<div class="row">
+    <div class="col-sm-4 col-md-3 sidebar">
+        <div class="nav-side-menu">
+            <div class="brand"><img src="{{.weburl}}public/img/go-icon.ico">Vulnerabilities</div>
+            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+            <div class="menu-list">
+
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li>
+                        <a href="{{.weburl}}index">
+                            <i class="fa fa-dashboard fa-lg"></i> Home
+                        </a>
+                    </li>
+
+                    <li>
+                            <a href="{{.weburl}}setup">
+                                <i class="glyphicon glyphicon-cog fa-lg"></i> Setup
+                            </a>
+                    </li>
+                    <li style="height:35px"></li>
+                    <li style="height:35px">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{ end }}
