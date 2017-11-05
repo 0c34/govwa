@@ -1,0 +1,31 @@
+{{define "template.setup"}}
+{{template "template.header" .}} 
+{{template "setup.sidebar" .}}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Setup/Reset</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <span class="subheader">Setup Database</span>
+            <p>
+                Click on the Create / Reset Database button to create or reset your database. 
+                make sure to correct the mysql credentials in /config/config.json
+            </p>
+
+                <form method="post">
+                    <input type="submit" class="btn btn-primary" value="Create / Reset">
+                    <input type="hidden" name="action" value="cr">
+                </form>
+                <br>
+            {{.error}}
+            
+        </div>
+        </div>    
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#info").delay(3000).fadeOut();
+        });
+    </script>
+{{template "template.footer"}} {{ end }}
