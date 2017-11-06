@@ -2,7 +2,6 @@ package user
 
 import (
 
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -141,7 +140,8 @@ func checkUserQuery(username, pass string) *UserData {
 
 	var uData = UserData{} //inisialize empty userdata
 
-	sql := fmt.Sprintf(`SELECT id, uname, COUNT(*) as cnt
+	const (
+		sql = `SELECT id, uname, COUNT(*) as cnt
 						FROM Users 
 						WHERE uname=? 
 						AND pass=?`)
