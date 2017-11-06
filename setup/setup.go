@@ -5,6 +5,7 @@ import(
 	"net/http"
 
 	"govwa/util"
+	"govwa/user/session"
 	"govwa/util/config"
 	"govwa/util/database"
 	"govwa/util/middleware"
@@ -34,6 +35,12 @@ type JsonResp struct{
 
 
 func setupViewHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params){
+	
+	/* clear login session when setup accessing setup page */
+	s := session.New()
+	s.DeleteSession(w, r)
+	cookies := []string{"Level", "Uid"}
+	util.DeleteCookie(w,cookies)
 
 	var info string
 	
