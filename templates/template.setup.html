@@ -12,13 +12,13 @@
                 make sure to correct the mysql credentials in /config/config.json
             </p>
 
-                <form method="post">
-                    <input type="submit" class="btn btn-primary" value="Create / Reset">
-                    <input type="hidden" name="action" value="cr">
+                <form id="myform">
+                    <input type="hidden" name="act" value="cr">
+                    <button type="button" class="btn btn-primary" id="action">Create / Reset</button>
                 </form>
                 <br>
             {{.error}}
-            
+            <div class="msg-area" style="width:350px"></div>
         </div>
         </div>    
         </div>
@@ -27,5 +27,31 @@
         $(document).ready(function(){
             $("#info").delay(3000).fadeOut();
         });
+
+        function pushAlert(message, cssClass){
+            var html = '';
+                html += '<div class="alert '+cssClass+' alert-dismissable">';
+                html += '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ';
+                html += message+'</div>';
+            return html
+
+        }
+        $("#action").on('click',function(){
+            var data = $("#myform").serialize();
+            var url = "{{.weburl}}setupaction";
+            var cssclass = "alert-success";
+
+            $.post(url, data)
+            .done(function(res){
+                $.each(res[0],function(key, value){
+                    if (value.Status == "0"){
+                        cssclass = "alert-danger";
+                    }
+                    html = pushAlert(value.message, cssclass);
+                    $(".msg-area").append(html)
+                })
+            })
+        })
+
     </script>
 {{template "template.footer"}} {{ end }}
