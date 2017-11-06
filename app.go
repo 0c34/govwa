@@ -9,6 +9,7 @@ import (
 	"govwa/setup"
 	"govwa/user"
 	"govwa/util"
+	"govwa/util/config"
 	"govwa/util/middleware"
 	"govwa/vulnerability/sqli"
 	"govwa/vulnerability/xss"
@@ -67,6 +68,8 @@ func main() {
 	}
 
 	fmt.Printf("Server running at port %s\n", s.Addr)
+	fmt.Printf("Open this url %s on you browser to access GoVWA",config.Fullurl)
+	fmt.Println("")
 	s.ListenAndServe()
 
 }
