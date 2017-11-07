@@ -10,6 +10,7 @@ import (
 	"govwa/user"
 	"govwa/util"
 	"govwa/util/config"
+	"govwa/setting"
 	"govwa/util/middleware"
 	"govwa/vulnerability/sqli"
 	"govwa/vulnerability/xss"
@@ -31,10 +32,10 @@ const (
 //index and set cookie
 
 func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	cookie := util.SetCookieLevel(w, r)
-	data := make(map[string]interface{})
 	
-	data["level"] = cookie
+	util.SetCookieLevel(w, r, "low") //set cookie Level default to low
+
+	data := make(map[string]interface{})
 	data["title"] = "Index"
 
 	util.SafeRender(w,r,"template.index", data)
@@ -51,6 +52,7 @@ func main() {
 	xss := xss.New()
 	idor := idor.New()
 	setup := setup.New()
+	setting := setting.New()
 
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
@@ -61,7 +63,8 @@ func main() {
 	xss.SetRouter(router)
 	idor.SetRouter(router)
 	setup.SetRouter(router)
-
+	setting.SetRouter(router)
+	
 	s := http.Server{
 		Addr : ":8082",
 		Handler : router,
