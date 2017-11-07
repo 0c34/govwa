@@ -5,14 +5,14 @@ import (
 	"time"
 )
 
-func SetCookieLevel(w http.ResponseWriter, r *http.Request) string {
-	ck := r.FormValue("level")
-	level := ck
+func SetCookieLevel(w http.ResponseWriter, r *http.Request, cookievalue string){
+
+	level := cookievalue
 	if level == "" {
 		level = "low"
 	}
 	SetCookie(w,"Level",level)
-	return level
+
 }
 
 func CheckLevel(r *http.Request) bool {

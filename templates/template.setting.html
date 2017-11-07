@@ -5,9 +5,39 @@
     <div class="panel panel-primary">
         <div class="panel-heading">System info & Setting</div>
         <div class="panel-body">
+            <span style="line-height: 30px;">Server Info :</span>
             <div class="pnl">
-        </div>
+                <pre>
+Login as         : {{.currentuser}}
+Operating system : {{.osversion}}
+MySQL Version    : {{.dbversion}}
+Level            : {{.level}}
+            </pre>
+            <form id="levelform" class="form-inline">
+               <div class="form-group">
+                   <label for="level"><span style="color:#428bca">Set Level:</span></label>
+                   <select id="level" name="level" class="form-control">
+                       <option value="" selected >-- Select Level --</option>
+                       <option value="low">Low</option>
+                       <option value="high">High</option>
+                   </select>
+               </div>
+               <button type="button" id="action" class="btn btn-primary">Set Level</button>
+            </form>
+            </div>
         </div>    
         </div>
     </div>
+    <script>
+        $("#action").on('click', function(){
+            var data= $("#levelform").serialize();
+            var url = "{{.weburl}}setlevel";
+            $.post(url,data)
+            .done(function(res){
+                console.log(res)
+                window.location.reload();
+            });
+            
+        })
+    </script>
 {{template "template.footer"}} {{ end }}
