@@ -228,12 +228,20 @@ body {
     margin-left: -30px;
     line-height: 30px;
 }
-.pnl a {
+.pnl .more-info{
+    display: block;
+    line-height: 20px;
+}
+.pnl .more-info span{
+    display: block;
+}
+.pnl .more-info a {
+    display: block;
     color: #428bca;
     text-decoration: none;
 }
 
-.pnl a:hover {
+.pnl .more-info a:hover {
     color: #ffcc66
 }
 
