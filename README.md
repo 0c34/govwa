@@ -80,7 +80,7 @@ warm regards [NemoSecurity](https://nemosecurity.com)
 #### Contributor
 ---
 * Khaedir (golang programming)
-* Aradyka (web design)
+* Xaqille (web design)
 
 
 
