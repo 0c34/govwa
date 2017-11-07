@@ -64,10 +64,10 @@ Open the url to access GoVWA and follow the setup instruction to create database
 
 GoVWA users:
 
-```
-admin : govwaadmin
-user1 : govwauser1
-```
+|uname|password|
+|-----|--------|
+|admin|govwaadmin|
+|user1|govwauser1|
 
 Explore the vulnerability.
 
