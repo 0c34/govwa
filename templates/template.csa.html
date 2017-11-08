@@ -1,0 +1,52 @@
+{{define "template.csa"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Client Side Authentication</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>Hello json</p>
+                <p>Verify your account to view full profile:</p>
+                <div id="alert" style="display: none"></div> 
+                <div class="well">
+                    <form class="form-inline" id="otpform">
+                    <div class="form-group">
+                        <label for="otp" style="color:#428bca;font-family:Open Sans; font-weight:500">Input Your Verfication Code:</label>
+                        <input type="text" class="form-control" name="otp" id="otp">
+                        <button type="button" id="vrf" class="btn btn-small btn-primary">Verify</button>
+                    </div>
+                   </form>
+                </div>
+                <div class="more-info">
+                        <span>More Info :</span>
+                        <a target="_blank" href="https://api.jquery.com/jquery.post/">https://api.jquery.com/jquery.post/</a>
+                        <a target="_blank" href="https://portswigger.net/burp/help/proxy_gettingstarted">https://portswigger.net/burp/help/proxy_gettingstarted</a>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+{{.js}}
+<script>
+    $("#vrf").on('click', function(){
+        var data = $("#otpform").serialize()
+        url = "{{.url}}verify"
+        $.post(url,data)
+        .done(function(res){
+            if(res[0].code != 1){
+                $("#alert").removeClass("alert alert-success")
+                $("#alert").addClass("alert alert-danger")
+                $("#alert").html("<p>Wrong OTP</p>")
+                $("#alert").show()
+                $("#alert").delay(2000).fadeOut();
+            }else{
+                $("#alert").removeClass("alert alert-danger")
+                $("#alert").addClass("alert alert-success")
+                $("#alert").html("<p>Account Verified</p>")
+                $("#alert").show()
+                //$("#alert").delay(2000).fadeOut();
+            }
+        })
+    });
+</script>
+{{template "template.footer"}} {{ end }}
