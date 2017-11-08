@@ -7,15 +7,13 @@
                 <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
                 <p>This should be safe</p>
                 <p>Your Profile :</p>
-                <div class="well">
                     {{.error}} 
-                    <ul>
-                        <li>Uid  : {{.uid}}</li>
-                        <li>Name : {{.name}}</li>
-                        <li>City : {{.city}} </li>
-                        <li>Number : {{.number}} </li>
-                    </ul>
-                    </div>
+<pre>
+Uid     : {{.uid}}
+Name    : {{.name}}
+City    : {{.city}} 
+Number  : {{.number}} 
+</pre>
                 <div class="more-info">
                     <span>More Info :</span>
                     <a target="_blank" href="http://www.sqlinjection.net/union/">http://www.sqlinjection.net/union/</a>
