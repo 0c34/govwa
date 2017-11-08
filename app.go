@@ -71,7 +71,7 @@ func main() {
 	}
 
 	fmt.Printf("Server running at port %s\n", s.Addr)
-	fmt.Printf("Open this url %s on you browser to access GoVWA",config.Fullurl)
+	fmt.Printf("Open this url %s on your browser to access GoVWA",config.Fullurl)
 	fmt.Println("")
 	s.ListenAndServe()
 
