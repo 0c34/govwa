@@ -57,7 +57,7 @@ govwa@ubuntu-server:~/go/src/govwa$ go run app.go
    °°ÛÛÛÛÛÛÛÛÛ °°ÛÛÛÛÛÛ     °°ÛÛÛ         °°ÛÛÛ °°ÛÛÛ      ÛÛÛÛÛ   ÛÛÛÛÛ
      °°°°°°°°°   °°°°°°       °°°           °°°   °°°      °°°°°   °°°°° 
 Server running at port :8082
-Open this url http://192.168.56.101:8082/ on you browser to access GoVWA
+Open this url http://192.168.56.101:8082/ on your browser to access GoVWA
 
 ```
 Open the url to access GoVWA and follow the setup instruction to create database and tables
