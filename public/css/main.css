@@ -192,7 +192,9 @@ body {
     font-family: Open Sans;
     text-align: justify;
 }
-
+.pnl pre{
+    line-height: 30px;
+}
 .pnl h1 {
     color: black;
     font-size: 45px;
