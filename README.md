@@ -73,7 +73,7 @@ Explore the vulnerability.
 
 #### Note
 ---
-GoVWA still developing on XXE and another vulnerability. however it still has functionality that doesn't works well. if you have any suggestion feel free to email me on sulhaedir05[at]gmail[dot]com
+GoVWA still developing on XXE and another vulnerability. however it still has functionality that doesn't works well. if you have any suggestion feel free to email me at sulhaedir05[at]gmail[dot]com
 
 warm regards [NemoSecurity](https://nemosecurity.com)
 
