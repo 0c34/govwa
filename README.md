@@ -14,6 +14,8 @@ If successfully installed you will have a directory called 'go' in your home dir
 ```
 git clone https://github.com/0c34/govwa.git
 
+git pull (to update)
+
 ```
 Before start to running govwa we need to install several golang package that required by govwa
 
