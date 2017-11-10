@@ -5,11 +5,11 @@ GoVWA (Go Vulnerable Web Application) is a web application developed to help the
 #### How To Install GoVWA
 ---
 #### Installing golang
-If you didn't have golang installed on your system. for the first install it using automation script from https://github.com/canha/golang-tools-install-script.
+If you didn't have golang installed on your system. first, install it using automation script from https://github.com/canha/golang-tools-install-script.
 
-Follow the instruction that provided and install golang depending on your Operating System Architecture.
+Follow the instruction which is provided by the author and install golang depending on your Operating System Architecture.
 
-If successfully installed you will have a directory called 'go' in your home directory. the go directory have three subdirectory (bin, pgk, src). go to src directory and clone the govwa repository. 
+If successfully installed you would have directory 'go' in your home directory. the go directory has three subdirectory (bin, pgk, src). switch to src directory then clone govwa repository. 
 
 ```
 git clone https://github.com/0c34/govwa.git
@@ -17,9 +17,9 @@ git clone https://github.com/0c34/govwa.git
 git pull (to update)
 
 ```
-Before start to running govwa we need to install several golang package that required by govwa
+we have to install several golang package that required by govwa
 
-Execute command below on you linux terminal
+Execute those command in your terminal
 ```
 go get github.com/go-sql-driver/mysql
 go get github.com/gorilla/sessions
@@ -28,7 +28,7 @@ go get github.com/julienschmidt/httprouter
 
 #### GoVWA config
 ---
-Go to govwa diretory and edit file inside directory config/config.json and change the configuration according to your needs.
+Open the file config.json which is located in config directory. Change the configuration according to your needs.
 
 ```
 {
