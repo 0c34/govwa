@@ -5,13 +5,6 @@ body {
     background: #f4f4f4;
 }
 
-.header {
-    background-image: url("http://localhost:8082/public/img/header2.png");
-    width: 1140px;
-    height: 130px;
-    margin-bottom: 20px;
-}
-
 .nav-side-menu {
     overflow: auto;
     font-family: verdana;
