@@ -1,12 +1,11 @@
 package session
 
 import (
-
-
-	"log"
 	"fmt"
+	"log"
 	"net/http"
-	"govwa/util/config"
+
+	"github.com/0c34/govwa/util/config"
 	"github.com/gorilla/sessions"
 )
 
@@ -28,7 +27,7 @@ func (self *Self) SetSession(w http.ResponseWriter, r *http.Request, data map[st
 	session.Options = &sessions.Options{
 		Path:     "/",
 		MaxAge:   3600,
-		HttpOnly: false, //set to false for xss :) 
+		HttpOnly: false, //set to false for xss :)
 	}
 
 	session.Values["govwa_session"] = true
@@ -40,13 +39,13 @@ func (self *Self) SetSession(w http.ResponseWriter, r *http.Request, data map[st
 		}
 	}
 	err = session.Save(r, w) //safe session and send it to client as cookie
-	
-		if err != nil {
-			log.Println(err.Error())
-		}
+
+	if err != nil {
+		log.Println(err.Error())
+	}
 }
 
-func (self *Self) GetSession(r *http.Request, key string) string  {
+func (self *Self) GetSession(r *http.Request, key string) string {
 	session, err := store.Get(r, "govwa")
 
 	if err != nil {
@@ -63,10 +62,10 @@ func (self *Self) DeleteSession(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	
+
 	session.Options = &sessions.Options{
 		MaxAge:   -1,
-		HttpOnly: false, //set to false for xss :) 
+		HttpOnly: false, //set to false for xss :)
 	}
 
 	session.Values["govwa_session"] = false
@@ -89,4 +88,3 @@ func (self *Self) IsLoggedIn(r *http.Request) bool {
 	}
 	return true
 }
-

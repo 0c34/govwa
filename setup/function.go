@@ -1,14 +1,14 @@
 package setup
 
-import(
-	"log"
+import (
 	"database/sql"
+	"log"
 
-	"govwa/util/database"
+	"github.com/0c34/govwa/util/database"
 )
 
-const(
-	DropUsersTable = `DROP TABLE IF EXISTS Users`;
+const (
+	DropUsersTable = `DROP TABLE IF EXISTS Users`
 
 	CreateUsersTable = `CREATE TABLE Users (
 		id int(10) NOT NULL AUTO_INCREMENT,
@@ -16,7 +16,7 @@ const(
 		pass varchar(100) NOT NULL,
 		PRIMARY KEY (id)
 	  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1`
-	
+
 	InsertUsers = `INSERT INTO Users VALUES (1,'admin','9f3b6fa4703a5ba96fda0dee48ec76fc'),(2,'user1','ff1d5c0015a535b01a5d03a373bf06f6')`
 
 	DropProfilesTable = `DROP TABLE IF EXISTS Profile`
@@ -31,45 +31,45 @@ const(
 	  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1`
 
 	InsertProfile = `INSERT INTO Profile VALUES (1,1,'Andro','Jakarta','08882112345'),(2,2,'Rocky','Bandung','08882112345')`
-	
 )
+
 var DB *sql.DB
 var err error
 
-func init(){
+func init() {
 	DB, err = database.Connect()
-	if err != nil{
+	if err != nil {
 		log.Println(err.Error())
 	}
 }
-func createUsersTable()error{
+func createUsersTable() error {
 
 	_, err = DB.Exec(DropUsersTable)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	_, err = DB.Exec(CreateUsersTable)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	_, err = DB.Exec(InsertUsers)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func createProfileTable()error{
+func createProfileTable() error {
 	_, err = DB.Exec(DropProfilesTable)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	_, err = DB.Exec(CreateProfilesTable)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	_, err = DB.Exec(InsertProfile)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	return nil
