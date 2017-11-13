@@ -84,6 +84,13 @@ warm regards [NemoSecurity](https://nemosecurity.com)
 * Khaedir (golang programming)
 * Xaquille (web design)
 
+#### To Do for add future vulnerability
+
+* Finish XXE Vulnerability
+* NoSQLInjection
+* Json Web API (unprotected API)
+* Build Simple Android APP
+
 
 
 
