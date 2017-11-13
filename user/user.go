@@ -1,19 +1,20 @@
 package user
 
 import (
+
+	"log"
+	"net/http"
+	"strconv"
 	"crypto/md5"
 	"database/sql"
 	"encoding/hex"
 	"html/template"
-	"log"
-	"net/http"
-	"strconv"
 
-	"github.com/0c34/govwa/user/session"
-	"github.com/0c34/govwa/util"
-	"github.com/0c34/govwa/util/config"
-	"github.com/0c34/govwa/util/database"
-	"github.com/0c34/govwa/util/middleware"
+	"govwa/util"
+	"govwa/util/config"
+	"govwa/user/session"
+	"govwa/util/database"
+	"govwa/util/middleware"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -48,10 +49,10 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 
 	/* check database for setup */
 	ok, err := database.CheckDatabase()
-	if !ok || err != nil {
+	if !ok || err != nil{
 		util.Redirect(w, r, "setup", 302) //if no database will redirect to setup page
 	}
-
+	
 	/* value of data will send to client over template */
 	data := make(map[string]interface{})
 	data["Title"] = "Login"
@@ -65,9 +66,9 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 
 	if r.Method == "POST" {
 
-		if !validateForm(w, r, ps) {
+		if !validateForm(w,r,ps) {
 			data["message"] = template.HTML("<div id=\"message\" class=\"alert alert-danger\"><p>Empty Username or Password</p></div>")
-		} else {
+		}else{
 			if loginAction(w, r, ps) {
 				util.Redirect(w, r, "index", 302)
 			} else {
@@ -77,7 +78,7 @@ func LoginViewHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Para
 			}
 		}
 	}
-	util.SafeRender(w, r, "template.login", data)
+	util.SafeRender(w,r, "template.login", data)
 }
 
 func loginAction(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bool {
@@ -108,14 +109,14 @@ func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	s := session.New()
 	s.DeleteSession(w, r)
 	cookies := []string{"Level", "Uid"}
-	util.DeleteCookie(w, cookies)
+	util.DeleteCookie(w,cookies)
 	util.Redirect(w, r, "login", 302)
 }
 
-func validateForm(w http.ResponseWriter, r *http.Request, _ httprouter.Params) bool {
+func validateForm(w http.ResponseWriter, r *http.Request, _ httprouter.Params)bool{
 	uname := r.FormValue("username")
 	pass := r.FormValue("password")
-	if uname == "" || pass == "" {
+	if uname == "" || pass == ""{
 		return false
 	}
 	return true
@@ -125,7 +126,7 @@ func validateForm(w http.ResponseWriter, r *http.Request, _ httprouter.Params) b
 type UserData struct {
 	id    int
 	uname string
-	cnt   int
+	cnt int
 }
 
 var db *sql.DB
@@ -143,8 +144,7 @@ func checkUserQuery(username, pass string) *UserData {
 		sql = `SELECT id, uname, COUNT(*) as cnt
 						FROM Users 
 						WHERE uname=? 
-						AND pass=?`
-	)
+						AND pass=?`)
 
 	stmt, err := db.Prepare(sql)
 	if err != nil {
