@@ -73,25 +73,19 @@ GoVWA users:
 
 Explore the vulnerability.
 
-#### Note
----
-GoVWA still developing on XXE and another vulnerability. however it still has functionality that doesn't works well. if you have any suggestion feel free to email me at sulhaedir05[at]gmail[dot]com
-
-warm regards [NemoSecurity](https://nemosecurity.com)
-
 #### Contributor
 ---
 * Khaedir (golang programming)
 * Xaquille (web design)
 
-#### To Do for add future vulnerability
+#### To Do
 
-* Finish XXE Vulnerability
+* ~~XXE Vulnerability~~
 * NoSQLInjection
 * Json Web API (unprotected API)
 * Build Simple Android APP
 
-
+warm regards [NemoSecurity](https://nemosecurity.com)
 
 
 
