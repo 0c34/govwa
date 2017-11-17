@@ -1,0 +1,28 @@
+{{define "template.xxe"}} {{template "template.header" .}} {{template "template.sidebar" .}}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">XML Entity Injection</div>
+        <div class="panel-body">
+            <div class="pnl">
+                <!-- <span class="subheader">SQL Injection Vulnerability</span> -->
+                <p>The use of html template</p>
+                <p>Search vulnerability term, and you will get the explanation about the term:</p>
+                <div class="well">
+                    <form class="form-inline">
+                    <div class="form-group">
+                        <label for="name" style="color:#428bca;font-family:Open Sans; font-weight:500">Enter a word:</label>
+                        <input type="text" class="form-control" name="term" id="term">
+                        <input type="submit" class="btn btn-small btn-primary" value="Search">
+                    </div>
+                   </form>
+                </div>
+                <div class="more-info">
+                        <span>More Info :</span>
+                        <a target="_blank" href="https://excess-xss.com/">https://excess-xss.com/</a>
+                        <a target="_blank" href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)</a>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+{{template "template.footer"}} {{ end }}
