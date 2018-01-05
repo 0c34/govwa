@@ -6,5 +6,3 @@ config/**
 *.dylib
 *.test
 *.out
-*.json
-*.go
