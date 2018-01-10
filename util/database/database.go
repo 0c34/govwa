@@ -1,64 +1,80 @@
 package database
 
-import(
-	"fmt"
-	"log"
+import (
 	"database/sql"
+	"fmt"
 	"govwa/util/config"
+	"log"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func Connect()(*sql.DB, error){
+type ErrorDb struct {
+	What string
+}
+
+func (e ErrorDb) Error() string {
+	return fmt.Sprintf("%v", e.What)
+}
+
+func ErrorConnect() error {
+	return ErrorDb{": Database service is not running!"}
+}
+
+func Connect() (*sql.DB, error) {
 
 	config := config.LoadConfig()
 
 	var dsn string
 	var db *sql.DB
 
-	dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/", config.User,config.Password,config.Sqlhost,config.Sqlport)
-	db, err := sql.Open("mysql",dsn)
+	dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/", config.User, config.Password, config.Sqlhost, config.Sqlport)
+	db, err := sql.Open("mysql", dsn)
 
-	if err != nil{
-		return nil,err
+	if err != nil {
+		err := ErrorConnect()
+		return nil, err
 	}
-	_,err = db.Exec("CREATE DATABASE IF NOT EXISTS "+config.Dbname)
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS " + config.Dbname)
 
-	if err != nil{
-		return nil,err
-	}else{
+	if err != nil {
+		err := ErrorConnect()
+		return nil, err
+	} else {
 
-		dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", config.User,config.Password,config.Sqlhost,config.Sqlport,config.Dbname)
-		db, err = sql.Open("mysql",dsn)
+		dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", config.User, config.Password, config.Sqlhost, config.Sqlport, config.Dbname)
+		db, err = sql.Open("mysql", dsn)
 
-		if err != nil{
-			return nil,err
+		if err != nil {
+			return nil, err
 
 		}
 	}
 
-	return db,nil
+	return db, nil
 }
 
 var DB *sql.DB
-func CheckDatabase()(bool, error){
+
+func CheckDatabase() (bool, error) {
 
 	/* this function use to check if no database selected and will redirect to setup page */
-	
+
 	DB, err := Connect()
-	if err != nil{
-		log.Printf("Connection Error %s ",err.Error())
+	if err != nil {
+		log.Printf("Connection Error %s ", err.Error())
 	}
 
 	const (
-		checksql = `SELECT 1  FROM Users limit 1` //this will check if Table dbname.Users exist otherways will redirect to setup page 
+		checksql = `SELECT 1  FROM Users limit 1` //this will check if Table dbname.Users exist otherways will redirect to setup page
 	)
 	result, err := DB.Exec(checksql)
 
-	if err != nil{
+	if err != nil {
 		log.Println(err.Error())
-		return false,err
+		return false, err
 	}
-	if result == nil{
+	if result == nil {
 		return false, err
 	}
 	log.Println(result)
