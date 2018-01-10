@@ -1,4 +1,4 @@
-config
+config/**
 *~
 *.exe
 *.dll
@@ -6,4 +6,3 @@ config
 *.dylib
 *.test
 *.out
-
