@@ -144,7 +144,7 @@ func checkUserQuery(username, pass string) *UserData {
 		sql = `SELECT id, uname, COUNT(*) as cnt
 						FROM Users 
 						WHERE uname=? 
-						AND pass=?`)
+						AND pass=? group by id, uname`)
 
 	stmt, err := db.Prepare(sql)
 	if err != nil {
