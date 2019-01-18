@@ -1,6 +1,6 @@
 #### GoVWA
 ---
-GoVWA (Go Vulnerable Web Application) is a web application developed to help the pentester and programmers to learn the vulnerabilities that often occur in web applications which is developed using golang. Vulnerabilities that exist in GoVWA are the most common vulnerabilities found in web applications today. So it will help programmers recognize vulnerabilities before they happen to their application. Govwa can also be an additional application of your pentest lab for learning and teaching.
+GoVWA (Go Vulnerable Web Application) is a web application developed to help the pentester and programmers to learn the vulnerabilities that often occur in web applications which are developed using golang. Vulnerabilities that exist in GoVWA are the most common vulnerabilities found in web applications today. So it will help programmers recognize vulnerabilities before they happen to their application. Govwa can also be an additional application of your pentest lab for learning and teaching.
 
 #### WARNING!
 ---
@@ -9,11 +9,11 @@ Since GoVWA is a web application that contains a vulnerability, **never upload g
 #### How To Install GoVWA
 ---
 #### Installing golang
-If you didn't have golang installed on your system. first, install it using automation script from https://github.com/canha/golang-tools-install-script.
+If you didn't have golang installed on your system. First, install it using automation script from https://github.com/canha/golang-tools-install-script.
 
 Follow the instruction which is provided by the author and install golang depending on your Operating System Architecture.
 
-If successfully installed you would have directory 'go' in your home directory. the go directory has three subdirectory (bin, pgk, src). switch to src directory then clone govwa repository. 
+If successfully installed you would have a directory 'go' in your home directory. The go directory has three subdirectories (bin, pgk, src). Switch to src directory then clone govwa repository. 
 
 ```
 git clone https://github.com/0c34/govwa.git
@@ -21,7 +21,7 @@ git clone https://github.com/0c34/govwa.git
 git pull (to update)
 
 ```
-we have to install several golang package that required by govwa
+we have to install several golang packages that required by govwa
 
 Execute those command in your terminal
 ```
@@ -32,7 +32,7 @@ go get github.com/julienschmidt/httprouter
 
 #### GoVWA config
 ---
-Open the file config.json which is located in config directory. Change the configuration according to your needs.
+Open the file config.json which is located in the config directory. Change the configuration according to your needs.
 
 ```
 {
@@ -63,10 +63,10 @@ govwa@ubuntu-server:~/go/src/govwa$ go run app.go
    °°ÛÛÛÛÛÛÛÛÛ °°ÛÛÛÛÛÛ     °°ÛÛÛ         °°ÛÛÛ °°ÛÛÛ      ÛÛÛÛÛ   ÛÛÛÛÛ
      °°°°°°°°°   °°°°°°       °°°           °°°   °°°      °°°°°   °°°°° 
 Server running at port :8082
-Open this url http://192.168.56.101:8082/ on your browser to access GoVWA
+Open this URL http://192.168.56.101:8082/ on your browser to access GoVWA
 
 ```
-Open the url to access GoVWA and follow the setup instruction to create database and tables
+Open the URL to access GoVWA and follow the setup instruction to create database and tables
 
 GoVWA users:
 
@@ -86,11 +86,7 @@ Explore the vulnerability.
 
 * ~~XXE Vulnerability~~
 * NoSQLInjection
-* Json Web API (unprotected API)
+* JSON Web API (unprotected API)
 * Build Simple Android APP
 
 warm regards [NemoSecurity](https://nemosecurity.com)
-
-
-
-
