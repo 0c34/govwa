@@ -17,8 +17,6 @@ git clone https://github.com/0c34/govwa.git
 git pull (to update)
 
 ```
-we have to install several golang package that required by govwa
-
 Install dependency packages
 ```
 go mod download 
