@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"html/template"
 
-	"govwa/user/session"
+	"github.com/govwa/user/session"
 )
 
 func SafeRender(w http.ResponseWriter, r *http.Request, name string, data map[string]interface{}) {

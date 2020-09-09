@@ -4,7 +4,7 @@ import(
 	"fmt"
 	"log"
 	"database/sql"
-	"govwa/util/config"
+	"github.com/govwa/util/config"
 	_ "github.com/go-sql-driver/mysql"
 )
 

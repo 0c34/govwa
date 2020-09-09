@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    container_name: govwa_app
+    build: .
+    ports:
+    - "8888:8888"
+    restart: on-failure
+    volumes:
+      - .:/app
+    depends_on:
+      - db-mysql
+
+  db-mysql:
+    image: mysql:5.7
+    container_name: db_mysql
+    ports: 
+      - 3307:3306
+    environment: 
+      - MYSQL_ROOT_HOST=mysql-host
+      - MYSQL_USER=govwauser
+      - MYSQL_PASSWORD=govwaP@ss
+      - MYSQL_DATABASE=govwa
+      - MYSQL_ROOT_PASSWORD= govwaP@ss
+    
+  
