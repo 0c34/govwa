@@ -5,15 +5,12 @@ GoVWA (Go Vulnerable Web Application) is a golang web application which contain 
 ---
 GoVWA is a vulnerable web application, **run the application on your local or testing environment only**
 
-#### How To Install GoVWA
+#### Installisation
 ---
-#### Installing golang
-If you didn't have golang installed on your system. first, install it using automation script from https://github.com/canha/golang-tools-install-script.
+#### Install golang
+Install golang on you host
 
-Follow the instruction which is provided by the author and install golang depending on your Operating System Architecture.
-
-If successfully installed you would have directory 'go' in your home directory. the go directory has three subdirectory (bin, pgk, src). switch to src directory then clone govwa repository. 
-
+#### Install from source
 ```
 git clone https://github.com/0c34/govwa.git
 
@@ -22,16 +19,14 @@ git pull (to update)
 ```
 we have to install several golang package that required by govwa
 
-Execute those command in your terminal
+Install dependency packages
 ```
-go get github.com/go-sql-driver/mysql
-go get github.com/gorilla/sessions
-go get github.com/julienschmidt/httprouter
+go mod download 
 ```
 
 #### GoVWA config
 ---
-Open the file config.json which is located in config directory. Change the configuration according to your needs.
+Modified the config.json file for database configuration
 
 ```
 {
@@ -40,8 +35,8 @@ Open the file config.json which is located in config directory. Change the confi
     "dbname": "govwa",
     "sqlhost": "localhost",
     "sqlport": "3306",
-    "webserver": "http://192.168.56.101",
-    "webport": "8082",
+    "webserver": "http://localhost",
+    "webport": "8888",
 
     "sessionkey:": "G0Vw444"
 }
@@ -49,7 +44,7 @@ Open the file config.json which is located in config directory. Change the confi
 ```
 Run GoVWA 
 ```
-govwa@ubuntu-server:~/go/src/govwa$ go run app.go 
+go run app.go 
 ```
 ```
 
@@ -61,8 +56,8 @@ govwa@ubuntu-server:~/go/src/govwa$ go run app.go
   °°ÛÛÛ  °°ÛÛÛ °ÛÛÛ °ÛÛÛ  °°°ÛÛÛÛÛ°     °°°ÛÛÛÛÛ°ÛÛÛÛÛ°    °ÛÛÛ    °ÛÛÛ 
    °°ÛÛÛÛÛÛÛÛÛ °°ÛÛÛÛÛÛ     °°ÛÛÛ         °°ÛÛÛ °°ÛÛÛ      ÛÛÛÛÛ   ÛÛÛÛÛ
      °°°°°°°°°   °°°°°°       °°°           °°°   °°°      °°°°°   °°°°° 
-Server running at port :8082
-Open this url http://192.168.56.101:8082/ on your browser to access GoVWA
+Server running at port :888
+Open this url http://localhost:8888/ on your browser to access GoVWA
 
 ```
 Open the url to access GoVWA and follow the setup instruction to create database and tables
@@ -83,12 +78,9 @@ Explore the vulnerability.
 
 #### To Do
 
-* ~~XXE Vulnerability~~
-* NoSQLInjection
-* Json Web API (unprotected API)
-* Build Simple Android APP
+* add more vulnerabilities
 
-warm regards [NemoSecurity](https://nemosecurity.com)
+Powered by [NemoSecurity](https://nemosecurity.com)
 
 
 
