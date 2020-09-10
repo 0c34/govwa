@@ -2,7 +2,6 @@ package setup
 
 import (
 	"database/sql"
-	"log"
 
 	"github.com/govwa/util/database"
 )
@@ -36,13 +35,16 @@ const (
 var DB *sql.DB
 var err error
 
-func init() {
+/*func init() {
 	DB, err = database.Connect()
 	if err != nil {
 		log.Println(err.Error())
 	}
-}
+}*/
+
 func createUsersTable() error {
+
+	DB, err = database.Connect()
 
 	_, err = DB.Exec(DropUsersTable)
 	if err != nil {

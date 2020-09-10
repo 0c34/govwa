@@ -18,6 +18,7 @@ RUN go mod download
 COPY . .
 
 # Build the application
+RUN go version
 RUN go build -o main .
 
 # Move to /dist directory as the place for resulting binary folder
@@ -33,7 +34,6 @@ COPY --from=builder /dist/main /
 COPY ./config/config.json /config/config.json
 COPY ./templates/* /templates/
 COPY ./public/. /public/
-
 EXPOSE 8888
 # Command to run
-ENTRYPOINT ["/main"]
+CMD ["./main"]

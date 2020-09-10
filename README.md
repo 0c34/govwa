@@ -10,7 +10,7 @@ GoVWA is a vulnerable web application, **run the application on your local or te
 #### Install golang
 Install golang on you host
 
-#### Install from source
+#### Setup from source
 ```
 git clone https://github.com/0c34/govwa.git
 
@@ -59,6 +59,18 @@ Open this url http://localhost:8888/ on your browser to access GoVWA
 
 ```
 Open the url to access GoVWA and follow the setup instruction to create database and tables
+
+#### Setup from docker
+```
+git clone https://github.com/0c34/govwa.git
+
+inside govwa directory:
+docker-compose up --build
+
+stop running process using
+docker-compose down --remove-orphans --volumes
+
+```
 
 GoVWA users:
 
