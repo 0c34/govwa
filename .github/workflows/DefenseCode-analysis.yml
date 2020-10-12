@@ -1,0 +1,18 @@
+
+
+name: DefenseCode Security Scan
+
+on: 
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  DefenseCode-security-scan:
+    name: DefenseCode ThunderScan Action
+    runs-on: ubuntu-latest
+    steps:
+      - name: DefenseCode ThunderScan Action
+        uses: defensecode/thunderscan-action@v1.0
+
