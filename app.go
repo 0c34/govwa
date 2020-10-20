@@ -42,6 +42,17 @@ func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	util.SafeRender(w, r, "template.index", data)
 }
 
+//index and set cookie
+func adminHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	util.SetCookieLevel(w, r, "low") //set cookie Level default to low
+
+	data := make(map[string]interface{})
+	data["title"] = "Index"
+
+	util.SafeRender(w, r, "template.index", data)
+}
+
 func main() {
 
 	fmt.Println(banner)
@@ -59,6 +70,7 @@ func main() {
 	router.ServeFiles("/public/*filepath", http.Dir("public/"))
 	router.GET("/", mw.LoggingMiddleware(mw.AuthCheck(indexHandler)))
 	router.GET("/index", mw.LoggingMiddleware(mw.DetectSQLMap(mw.AuthCheck(indexHandler))))
+	router.GET("/wp-admin", mw.LoggingMiddleware(mw.DetectSQLMap(mw.AuthCheck(adminHandler))))
 
 	user.SetRouter(router)
 	sqlI.SetRouter(router)
