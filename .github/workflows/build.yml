@@ -10,7 +10,6 @@ jobs:
       uses: fadhilthomas/sonarqube-action@master
       with:
         host: ${{ secrets.SONARQUBE_HOST }}
-        login: ${{ secrets.SONARQUBE_USER }}
-        password: ${{ secrets.SONARQUBE_PASS }}
+        login: ${{ secrets.SONARQUBE_TOKEN }}
         projectKey: "govwa"
         projectName: "govwa"
