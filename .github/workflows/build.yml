@@ -1,0 +1,16 @@
+on: push
+name: Code Static Analysis
+jobs:
+  sonarQubeTrigger:
+    name: SonarQube Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: fadhilthomas/sonarqube-action@master
+      with:
+        host: ${{ secrets.SONARQUBE_HOST }}
+        login: ${{ secrets.SONARQUBE_USER }}
+        password: ${{ secrets.SONARQUBE_PASS }}
+        projectKey: "govwa"
+        projectName: "govwa"
