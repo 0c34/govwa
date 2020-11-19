@@ -1,20 +1,17 @@
 #### GoVWA
-GoVWA (Go Vulnerable Web Application) is a web application developed to help the pentester and programmers to learn the vulnerabilities that often occur in web applications which are developed using golang. Vulnerabilities that exist in GoVWA are the most common vulnerabilities found in web applications today. So it will help programmers recognize vulnerabilities before they happen to their application. Govwa can also be an additional application of your pentest lab for learning and teaching.
+GoVWA (Go Vulnerable Web Application) is a vulnerable web application designed for pentester or programmers to learn the web application vulnerability that often occur in web applications. The vulnerabilities in GoVWA are OWASP Top 10 category. 
 
 #### WARNING!
 ---
-GoVWA is a vulnerable web application, **run the application on your local or testing environment only**
+GoVWA is a vulnerable web application, **Run it only on local environment**
 
 #### Installation
 ---
 #### Installing golang
-If you didn't have golang installed on your system. First, install it using automation script from https://github.com/canha/golang-tools-install-script.
+Golang versiong : >= 1.11 
+Installing guide : https://www.digitalocean.com/community/tutorials/how-to-install-go-1-6-on-ubuntu-16-04
 
-Follow the instruction which is provided by the author and install golang depending on your Operating System Architecture.
-
-If successfully installed you would have a directory 'go' in your home directory. The go directory has three subdirectories (bin, pgk, src). Switch to src directory then clone govwa repository. 
-
-#### Setup from source
+#### Setup
 ```
 git clone https://github.com/0c34/govwa.git
 
@@ -22,9 +19,7 @@ git pull (to update)
 
 ```
 #### Install dependency packages
-we have to install several golang packages that required by govwa
 
-Execute those command in your terminal
 ```
 go mod download 
 ```
@@ -33,7 +28,7 @@ go mod download
 ---
 #### Modified the config.json file for database configuration
 
-Open the file config.json which is located in the config directory. Change the configuration according to your needs.
+config.json file is located in config directory.
 
 ```
 {
