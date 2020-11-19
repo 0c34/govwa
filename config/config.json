@@ -7,5 +7,5 @@
     "webserver": "http://localhost",
     "webport": "8888",
 
-    "sessionkey:": "G0Vw444"
+    "sessionkey": "G0Vw444"
 }
