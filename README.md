@@ -7,7 +7,6 @@ GoVWA is a vulnerable web application, **run the application on your local or te
 
 #### Installation
 ---
-=======
 #### Installing golang
 If you didn't have golang installed on your system. First, install it using automation script from https://github.com/canha/golang-tools-install-script.
 
@@ -102,12 +101,9 @@ Explore the vulnerability.
 #### To Do
 
 * add more vulnerabilities
-
-Powered by [NemoSecurity](https://nemosecurity.com)
-=======
 * ~~XXE Vulnerability~~
 * NoSQLInjection
 * JSON Web API (unprotected API)
 * Build Simple Android APP
 
-warm regards [NemoSecurity](https://nemosecurity.com)
+Powered by [NemoSecurity](https://nemosecurity.com)
