@@ -7,3 +7,4 @@ config
 *.test
 *.out
 
+config/config.json

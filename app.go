@@ -69,7 +69,7 @@ func main() {
 	setting.SetRouter(router)
 
 	s := http.Server{
-		Addr:    ":8888",
+		Addr:    fmt.Sprintf(":%s", config.Cfg.Webport),
 		Handler: router,
 	}
 
