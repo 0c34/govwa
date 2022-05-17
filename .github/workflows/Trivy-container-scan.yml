@@ -1,4 +1,4 @@
-name: build
+name: Trivy Container build
 on:
   push:
     branches:
