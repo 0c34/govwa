@@ -16,6 +16,7 @@ jobs:
         with:
             args: --fail-verified ${{ github.event.repository.default_branch }} HEAD
         env:
-          TRUFFLEHOG_API_ADDRESS: ${{ secrets.TRUFFLEHOG_API_ADDRESS }}
-          TRUFFLEHOG_SCANNER_GROUP: ${{ secrets.TRUFFLEHOG_SCANNER_GROUP }}
-          TRUFFLEHOG_SCANNER_TOKEN: ${{ secrets.TRUFFLEHOG_SCANNER_TOKEN }}
+          TRUFFLEHOG_API_ADDRESS: buoyant-artistic-collector.api.c1.prod.trufflehog.org:8443
+          TRUFFLEHOG_SCANNER_GROUP: circle ci?
+          TRUFFLEHOG_SCANNER_TOKEN: thog-agent-ab9ad0e081620902950d0f29297b0489
+          
