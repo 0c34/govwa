@@ -7,7 +7,7 @@ on: [push, pull_request]
 jobs:
   semgrep:
     # User-definable name of this GitHub Actions job:
-    name: Scan
+    name: Semgrep Scan, Github Security Report
     # If you are self-hosting, change the following `runs-on` value: 
     runs-on: ubuntu-latest
     permissions:
@@ -35,6 +35,14 @@ jobs:
            # Default timeout is 1800 seconds (30 minutes).
            # Set to 0 to disable the timeout.
            # SEMGREP_TIMEOUT: 300
+      - name: configure .semgrepignore
+        run: |
+          if ! [ -f .semgrepignore ]; then
+            wget -O .semgrepignore https://raw.githubusercontent.com/returntocorp/semgrep/develop/cli/src/semgrep/templates/.semgrepignore
+          fi
+          echo semgrep.sarif >> .semgrepignore
+          
+          
       - name: Upload SARIF file for GitHub Advanced Security Dashboard
         uses: github/codeql-action/upload-sarif@v2
         with:
