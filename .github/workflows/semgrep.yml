@@ -10,14 +10,14 @@ jobs:
     name: Scan
     # If you are self-hosting, change the following `runs-on` value: 
     runs-on: ubuntu-latest
-
-    container:
-      # A Docker image with Semgrep installed. Do not change this.
-      image: returntocorp/semgrep
     permissions:
       actions: read
       contents: read
       security-events: write
+    container:
+      # A Docker image with Semgrep installed. Do not change this.
+      image: returntocorp/semgrep
+
     # Skip any PR created by dependabot to avoid permission issues:
     if: (github.actor != 'dependabot[bot]')
 
