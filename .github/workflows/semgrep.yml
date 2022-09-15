@@ -1,7 +1,7 @@
 # Name of this GitHub Actions workflow.
 name: Semgrep
 
-on: [push, pull_request]
+on: [pull_request]
   
 
 jobs:
