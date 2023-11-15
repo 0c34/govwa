@@ -23,3 +23,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: semgrep ci
+    - name: package-logs
+      if: always()
+      run: tar czf logs.tgz ~/.semgrep/last.log
+    - name: upload-logs
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: logs.tgz
+        path: logs.tgz
+        retention-days: 1
