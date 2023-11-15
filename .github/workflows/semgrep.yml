@@ -22,10 +22,10 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep ci
+    - run: semgrep ci &> semgrep.log
     - name: package-logs
       if: always()
-      run: tar czf logs.tgz ~/.semgrep/last.log
+      run: tar czf logs.tgz semgrep.log
     - name: upload-logs
       if: always()
       uses: actions/upload-artifact@v3
