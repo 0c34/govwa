@@ -27,8 +27,10 @@ jobs:
           IFS=$'\n'
 
           function gosec_report() {
-              gosec_findings=$(cat gosec.json | jq '.Issues[] | {"severity": .severity, "confidence": .confidence, "details": .details, "file": .file, "code": .code, "line": .line}')
-              
+              gosec_html=$(gosec -quiet -fmt html -out gosec.html  ./...)
+
+              gosec_findings=$(cat gosec.html | grep 'var data' | sed 's+var data =++g' | sed 's+;$++g' | jq '.Issues[] | {"severity": .severity, "confidence": .confidence, "details": .details, "file": .file, "code": .code, "line": .line}')
+
               for finding in $(echo "${gosec_findings}" | jq -c '.')
               do 
                   severity=$(echo "${finding}" | jq '.severity')
@@ -51,6 +53,11 @@ jobs:
               echo "Total Findings: $(echo ${gosec_findings} | jq -s 'length')"
           }
           gosec_report
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gosec html report
+          path: ./gosec.html
+          
       - name: Run govulncheck
         id: govulncheck
         if: always()
