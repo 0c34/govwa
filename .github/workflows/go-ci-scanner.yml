@@ -20,7 +20,36 @@ jobs:
         uses: securego/gosec@master
         with:
           # we let the report trigger content trigger a failure using the GitHub Security features.
-          args: '-quiet -fmt html ./...'
+          args: '-quiet -fmt json -out gosec.json ./...'
+      - name: Gosec Findings
+        run: |
+          IFS=$'\n'
+
+          function gosec_report() {
+              gosec_findings=$(gosec -quiet -fmt json  ./... | jq '.Issues[] | {"severity": .severity, "confidence": .confidence, "details": .details, "file": .file, "code": .code, "line": .line}')
+              
+              for finding in $(echo "${gosec_findings}" | jq -c '.')
+              do 
+                  severity=$(echo "${finding}" | jq '.severity')
+                  confidence=$(echo "${finding}" | jq '.severity')
+                  details=$(echo "${finding}" | jq '.details')
+                  file=$(echo "${finding}" | jq '.file')
+                  code=$(echo "${finding}" | jq '.code')
+                  line=$(echo "${finding}" | jq '.line')
+          
+                  echo "/-------------------------------------------------------------------/"
+                  echo "details:      ${details}"
+                  echo "severity:     ${severity}"
+                  echo "confidence:   ${confidence}"
+                  echo "line:         ${line}"
+                  echo "code:         ${code}"
+                  echo "file:         ${file}"
+                  echo ""
+              done
+
+              echo "Total Findings: $(echo ${gosec_findings} | jq -s 'length')"
+          }
+          gosec_report
       - name: Run govulncheck
         id: govulncheck
         if: always()
