@@ -23,6 +23,7 @@ jobs:
           args: '-no-fail -quiet -fmt yaml ./...'
       - name: Run govulncheck
         id: govulncheck
+        if: always()
         uses: golang/govulncheck-action@v1
         with:
            go-version-input: 1.20.6
