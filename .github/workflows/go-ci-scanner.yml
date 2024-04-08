@@ -20,7 +20,7 @@ jobs:
         uses: securego/gosec@master
         with:
           # we let the report trigger content trigger a failure using the GitHub Security features.
-          args: '-quiet -fmt yaml ./...'
+          args: '-no-fail -quiet -fmt yaml ./...'
       - name: Run govulncheck
         id: govulncheck
         uses: golang/govulncheck-action@v1
