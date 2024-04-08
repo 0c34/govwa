@@ -10,12 +10,6 @@ on:
 
 jobs:
   tests:
-    permissions:
-      # required for all workflows
-      security-events: write
-      # only required for workflows in private repositories
-      actions: read
-      contents: read
     runs-on: ubuntu-latest
     env:
       GO111MODULE: on
@@ -26,9 +20,4 @@ jobs:
         uses: securego/gosec@master
         with:
           # we let the report trigger content trigger a failure using the GitHub Security features.
-          args: '-no-fail -fmt sarif -out results.sarif ./...'
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: results.sarif
+          args: '-no-fail -quiet -fmt yaml ./...'
