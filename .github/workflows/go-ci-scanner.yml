@@ -52,6 +52,7 @@ jobs:
           }
           gosec_report
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: gosec html report
           path: ./gosec.html
