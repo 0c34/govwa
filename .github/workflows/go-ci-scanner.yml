@@ -6,6 +6,8 @@ on:
   pull_request:
     branches:
       - master
+
+permissions: write-all
 jobs:
   tests:
     runs-on: ubuntu-latest
