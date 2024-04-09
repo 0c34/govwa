@@ -97,11 +97,13 @@ jobs:
            go-package: ./...
       
       - name: Setup Python for Chainjacking Tool   
+        if: always()
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
       - name: Chainjacking Check 
+        if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
