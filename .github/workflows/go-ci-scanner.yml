@@ -47,10 +47,11 @@ jobs:
         uses: securego/gosec@master
         with:
           # we let the report trigger content trigger a failure using the GitHub Security features.
-          args: '-fmt html -out gosec.html ./...'
+          args: '-quiet -fmt html -out gosec.html ./...'
       - name: Gosec Findings
         if: always()
         run: |
+          ls -la
           IFS=$'\n'
 
           function gosec_report() {
