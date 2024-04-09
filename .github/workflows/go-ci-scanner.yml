@@ -31,7 +31,7 @@ jobs:
                   if [[ "$GO_VERSION" == "" ]] 
                   then
                       echo "Regex pattern does not match, setting Go Version back to default"
-                      echo GO_VERSION="1.22.2" >> $GITHUB_ENV
+                      echo "GO_VERSION=1.22.2" >> $GITHUB_ENV
                   fi 
               fi
           }
