@@ -1,52 +1,28 @@
-name: Run Gosec
+name: GO Security Checks
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
-
+      - main
+  push:
+    branches:
+      - master
+      - main
 
 jobs:
-  Go-Security-Check:
+  # https://github.com/securego/gosec
+  gosec_job:
     runs-on: ubuntu-latest
+    name: Run gosec
     env:
       GO111MODULE: on
-      # GO_VERSION: "1.22.2"
     steps:
-      - name: Checkout Source
-        uses: actions/checkout@v3
-      # - name: Set go.mod version
-      #   run: |
-      #     function get_go_mod_version {  
-      #         go_mod_path=$(find . -name 'go.mod' | head -n 1)
-          
-      #         if [[ -n "${go_mod_path}" ]]
-      #         then 
-      #             # Get go.mod version, the regex is for input validation
-      #             GO_VERSION=$(cat ${go_mod_path} | grep -wE '^go [0-9]{1,2}\.[0-9]{1,3}(\.|$)([0-9]{1,3})?$' || true)
-      #             echo "$GO_VERSION" | awk -F' ' '{print "GO_VERSION="$2}' >> $GITHUB_ENV
-                  
-      #             # Set the go version back to default if pattern does not match
-      #             if [[ "$GO_VERSION" == "" ]] 
-      #             then
-      #                 echo "Regex pattern does not match, setting Go Version back to default"
-      #                 echo "GO_VERSION=1.22.2" >> $GITHUB_ENV
-      #             fi 
-      #         fi
-      #     }
-          
-      #     get_go_mod_version
-      # - name: GO VERSION
-      #   run: |
-      #     # Updated env will only show up in the next step
-      #     echo "Go Version (Step): $GO_VERSION"
-          
+      - name: Checkout Code
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Run Gosec Security Scanner
-        uses: securego/gosec@master
+        uses: securego/gosec@26e57d6b340778c2983cd61775bc7e8bb41d002a
         with:
-          args: '-quiet -fmt html -out gosec.html ./...'
+          args: "-quiet -fmt html -out gosec.html ./..."
       - name: Gosec Findings
         if: always()
         run: |
@@ -63,49 +39,55 @@ jobs:
                   file=$(echo "${finding}" | jq '.file')
                   code=$(echo "${finding}" | jq '.code')
                   line=$(echo "${finding}" | jq '.line')
-          
+
                   echo "/-------------------------------------------------------------------/"
                   echo "details:      ${details}"
                   echo "severity:     ${severity}"
                   echo "confidence:   ${confidence}"
                   echo "line:         ${line}"
-                  echo "code:         ${code}"
+                  echo -e "code:         \n${code}"
                   echo "file:         ${file}"
                   echo ""
               done
 
               echo "Total Findings: $(echo ${gosec_findings} | jq -s 'length')"
           }
-          
+
           gosec_report
-      
+
       # Upload gosec.html report as an artifact
-      - uses: actions/upload-artifact@v4
-        if: always()
+      - uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3
         with:
           name: gosec html report
           path: ./gosec.html
 
-      # Govulncheck requires Go version 1.18 or later - https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck
-      - name: Run govulncheck
-        id: govulncheck
-        if: always()
-        uses: golang/govulncheck-action@v1
+  # https://github.com/golang/govulncheck-action
+  # Govulncheck requires Go version 1.18 or later - https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck
+  govulncheck_job:
+    runs-on: ubuntu-latest
+    name: Run govulncheck
+    steps:
+      - id: govulncheck
+        uses: golang/govulncheck-action@7da72f730e37eeaad891fcff0a532d27ed737cd4
         with:
-           # go-version-file: go.mod
-           go-version-input: 1.21.1
-           go-package: ./...
-      
-      - name: Setup Python for Chainjacking Tool   
-        if: always()
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
+          go-version-file: ./go.mod
+          go-version-input: 1.21.1
+          go-package: ./...
 
-      - name: Chainjacking Check 
-        if: always()
+  # https://github.com/Checkmarx/chainjacking
+  chainjacking_job:
+    runs-on: ubuntu-latest
+    name: Run chainjacking
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - name: Setup Python for Chainjacking Tool
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d
+        with:
+          python-version: "3.9"
+      - name: ChainJacking check
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: |
           python -m pip install -q chainjacking
           python -m chainjacking -gt $GITHUB_TOKEN
