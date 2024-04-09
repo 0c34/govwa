@@ -34,7 +34,7 @@ jobs:
                       echo GO_VERSION="1.22.2" >> $GITHUB_ENV
                   fi 
               fi
-              echo "Go Version: ${{ env.GO_VERSION }}"
+              echo "Go Version: $GO_VERSION"
           }
           
           get_go_mod_version
