@@ -95,3 +95,15 @@ jobs:
            # go-version-file: go.mod
            go-version-input: 1.21.1
            go-package: ./...
+      
+      - name: Setup Python for Chainjacking Tool   
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Chainjacking Check 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m pip install -q chainjacking
+          python -m chainjacking -gt $GITHUB_TOKEN
