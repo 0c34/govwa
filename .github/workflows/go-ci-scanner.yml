@@ -17,12 +17,10 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
-      - name: Get go.mod version
+      - name: Set go.mod version
         run: |
           function get_go_mod_version {  
               go_mod_path=$(find . -name 'go.mod' | head -n 1)
-
-              echo "Go Version (before): $GO_VERSION"
           
               if [[ -n "${go_mod_path}" ]]
               then 
@@ -33,16 +31,15 @@ jobs:
                   if [[ "$GO_VERSION" == "" ]] 
                   then
                       echo "Setting Go Version back to default"
-                      echo 'GO_VERSION="1.22.2"' >> $GITHUB_ENV
+                      echo GO_VERSION="1.22.2" >> $GITHUB_ENV
                   fi 
               fi
-              echo "Go Version: $GO_VERSION"
           }
           
           get_go_mod_version
-      - name: GOVERSION
+      - name: GO VERSION
         run: |
-          echo "Go Version (Next Step): $GO_VERSION"
+          echo "Go Version: $GO_VERSION"
           
       - name: Run Gosec Security Scanner
         uses: securego/gosec@master
