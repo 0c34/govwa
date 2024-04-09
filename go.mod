@@ -1,6 +1,6 @@
 module github.com/govwa
 
-go 1.15
+go 1.15`ls -la`
 
 require (
 	github.com/gin-gonic/gin v1.6.3 // indirect
