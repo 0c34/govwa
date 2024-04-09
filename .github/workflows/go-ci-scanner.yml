@@ -91,5 +91,5 @@ jobs:
         if: always()
         uses: golang/govulncheck-action@v1
         with:
-           go-version: 1.22.1
+           go-version-input: 1.22.1
            go-package: ./...
