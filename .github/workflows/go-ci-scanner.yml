@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GO111MODULE: on
-      GO_VERSION: "1.22.2"
+      # GO_VERSION: "1.22.2"
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
@@ -46,12 +46,10 @@ jobs:
       - name: Run Gosec Security Scanner
         uses: securego/gosec@master
         with:
-          # we let the report trigger content trigger a failure using the GitHub Security features.
           args: '-quiet -fmt html -out gosec.html ./...'
       - name: Gosec Findings
         if: always()
         run: |
-          ls -la
           IFS=$'\n'
 
           function gosec_report() {
@@ -80,16 +78,20 @@ jobs:
           }
           
           gosec_report
+      
+      # Upload gosec.html report as an artifact
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: gosec html report
           path: ./gosec.html
-          
+
+      # Govulncheck requires Go version 1.18 or later - https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck
       - name: Run govulncheck
         id: govulncheck
         if: always()
         uses: golang/govulncheck-action@v1
         with:
-           go-version-input: 1.22.1
+           # go-version-file: go.mod
+           go-version-input: 1.21.1
            go-package: ./...
