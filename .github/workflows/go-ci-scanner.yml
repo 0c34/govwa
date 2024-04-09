@@ -17,31 +17,31 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
-      - name: Set go.mod version
-        run: |
-          function get_go_mod_version {  
-              go_mod_path=$(find . -name 'go.mod' | head -n 1)
+      # - name: Set go.mod version
+      #   run: |
+      #     function get_go_mod_version {  
+      #         go_mod_path=$(find . -name 'go.mod' | head -n 1)
           
-              if [[ -n "${go_mod_path}" ]]
-              then 
-                  # Get go.mod version, the regex is for input validation
-                  GO_VERSION=$(cat ${go_mod_path} | grep -wE '^go [0-9]{1,2}\.[0-9]{1,3}(\.|$)([0-9]{1,3})?$' || true)
-                  echo "$GO_VERSION" | awk -F' ' '{print "GO_VERSION="$2}' >> $GITHUB_ENV
+      #         if [[ -n "${go_mod_path}" ]]
+      #         then 
+      #             # Get go.mod version, the regex is for input validation
+      #             GO_VERSION=$(cat ${go_mod_path} | grep -wE '^go [0-9]{1,2}\.[0-9]{1,3}(\.|$)([0-9]{1,3})?$' || true)
+      #             echo "$GO_VERSION" | awk -F' ' '{print "GO_VERSION="$2}' >> $GITHUB_ENV
                   
-                  # Set the go version back to default if pattern does not match
-                  if [[ "$GO_VERSION" == "" ]] 
-                  then
-                      echo "Regex pattern does not match, setting Go Version back to default"
-                      echo "GO_VERSION=1.22.2" >> $GITHUB_ENV
-                  fi 
-              fi
-          }
+      #             # Set the go version back to default if pattern does not match
+      #             if [[ "$GO_VERSION" == "" ]] 
+      #             then
+      #                 echo "Regex pattern does not match, setting Go Version back to default"
+      #                 echo "GO_VERSION=1.22.2" >> $GITHUB_ENV
+      #             fi 
+      #         fi
+      #     }
           
-          get_go_mod_version
-      - name: GO VERSION
-        run: |
-          # Updated env will only show up in the next step
-          echo "Go Version (Step): $GO_VERSION"
+      #     get_go_mod_version
+      # - name: GO VERSION
+      #   run: |
+      #     # Updated env will only show up in the next step
+      #     echo "Go Version (Step): $GO_VERSION"
           
       - name: Run Gosec Security Scanner
         uses: securego/gosec@master
@@ -91,5 +91,5 @@ jobs:
         if: always()
         uses: golang/govulncheck-action@v1
         with:
-           go-version-input: 1.15
+           go-version-file: go.mod
            go-package: ./...
