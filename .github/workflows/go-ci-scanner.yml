@@ -47,7 +47,7 @@ jobs:
         uses: securego/gosec@master
         with:
           # we let the report trigger content trigger a failure using the GitHub Security features.
-          args: '-quiet -fmt yaml ./...'
+          args: '-fmt yaml ./...'
       - name: Gosec Findings
         if: always()
         run: |
