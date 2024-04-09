@@ -9,7 +9,7 @@ on:
 
 
 jobs:
-  go_security_scanners:
+  Go-Security-Check:
     runs-on: ubuntu-latest
     env:
       GO111MODULE: on
