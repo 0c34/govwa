@@ -33,7 +33,7 @@ jobs:
                   if [[ "$GO_VERSION" == "" ]] 
                   then
                       echo "Setting Go Version back to default"
-                      echo GO_VERSION="1.22.2" >> $GITHUB_ENV
+                      echo 'GO_VERSION="1.22.2"' >> $GITHUB_ENV
                   fi 
               fi
               echo "Go Version: $GO_VERSION"
