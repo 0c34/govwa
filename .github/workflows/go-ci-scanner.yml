@@ -45,9 +45,9 @@ jobs:
                   echo "details:      ${details}"
                   echo "severity:     ${severity}"
                   echo "confidence:   ${confidence}"
-                  echo "line:         ${line}"
-                  echo -e "code:         \n${code}"
                   echo "file:         ${file}"
+                  echo "line:         ${line}"
+                  echo -e "code:         \n${code}\n"
                   echo ""
               done
 
