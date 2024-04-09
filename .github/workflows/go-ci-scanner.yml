@@ -21,6 +21,8 @@ jobs:
         run: |
           function get_go_mod_version {  
               go_mod_path=$(find . -name 'go.mod' | head -n 1)
+
+              echo "Go Version (before): $GO_VERSION"
           
               if [[ -n "${go_mod_path}" ]]
               then 
