@@ -34,14 +34,12 @@ jobs:
                       echo GO_VERSION="1.22.2" >> $GITHUB_ENV
                   fi 
               fi
-
-              echo "Go Version (ENV): ${{ env.GO_VERSION }}"
-              echo "Go Version: ${GO_VERSION}"
           }
           
           get_go_mod_version
       - name: GO VERSION
         run: |
+          # Updated env will only show up in the next step
           echo "Go Version (Step): $GO_VERSION"
           
       - name: Run Gosec Security Scanner
