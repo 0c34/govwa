@@ -26,7 +26,7 @@ jobs:
               then 
                   # Get go.mod version, the regex is for input validation
                   GO_VERSION=$(cat ${go_mod_path} | grep -wE '^go [0-9]{1,2}\.[0-9]{1,3}(\.|$)([0-9]{1,3})?$' || true)
-                  echo "$GO_VERSION" | awk -F' ' '{print $2}' >> $GITHUB_ENV
+                  echo "$GO_VERSION" | awk -F' ' '{print "GO_VERSION="$2}' >> $GITHUB_ENV
                   
                   # Set the go version back to default if pattern does not match
                   if [[ "$GO_VERSION" == "" ]] 
