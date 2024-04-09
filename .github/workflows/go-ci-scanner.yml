@@ -28,13 +28,13 @@ jobs:
                   GO_VERSION=$(cat ${go_mod_path} | grep -wE '^go [0-9]{1,2}\.[0-9]{1,3}(\.|$)([0-9]{1,3})?$') || true >> $GITHUB_ENV
                   
                   # Set the go version back to default if pattern does not match
-                  if [[ "${GO_VERSION}" == "" ]] 
+                  if [[ "$GO_VERSION" == "" ]] 
                   then
                       echo "Setting Go Version back to default"
                       echo GO_VERSION="1.22.2" >> $GITHUB_ENV
                   fi 
               fi
-              echo "Go Version: ${GO_VERSION}"
+              echo "Go Version: $GO_VERSION"
           }
           
           get_go_mod_version
