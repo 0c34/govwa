@@ -12,7 +12,7 @@ Follow the instruction which is provided by the author and install golang depend
 If successfully installed you would have directory 'go' in your home directory. the go directory has three subdirectory (bin, pgk, src). switch to src directory then clone govwa repository. 
 
 ```
-git clone https://github.com/0c34/govwa.git
+git clone https://github.com/0c34/govwa.git 
 
 git pull (to update)
 
